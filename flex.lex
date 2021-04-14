@@ -18,7 +18,6 @@ int main(int argc, char *argv[]){
         printf("./a.out <Filename>");
         return 0;
     }
-    printf("%s",argv[1]);
     FILE *fp;
     fp = fopen(argv[1],"r");
     yyin = fp;
