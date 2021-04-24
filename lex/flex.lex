@@ -1,14 +1,17 @@
 %{
-int rowCount = 0;
+    #include "y.tab.h"
+    #include <stdlib.h>
+    int rowCount = 0;
+    void yyerror(char *);
 %}
 
 %%
-//Keywords
+ /*Keywords*/
 int         {return INTEGER;}
 string      {return STRING;}
 bool        {return BOOLEAN;}
 
-//Controll-Keywords
+ /*Controll-Keywords*/
 if          {return IF;}
 for         {return FOR;}
 while       {return WHILE;}
@@ -17,32 +20,33 @@ false       {return FALSE;}
 \|\|        {return OR;}
 &&          {return AND;}
 
-//Operators
-\+|-|\*     {return CALC_OPERATION;}
+ /*Operators*/
 =           {return ASSIGNMENT;}
 !           {return INVERSE;}
-<           {return RIGHT_GREATER;}
->           {return LEFT_GREATER;}
+\<          {return RIGHT_GREATER;}
+\>          {return LEFT_GREATER;}
 
-//Other stuff
+ /*Other stuff*/
 [A-Za-z]*   {return CHARS;}
-[0-9]*      {return NUMBER;}
-;|\n|\r\n           {rowCount++;return LINE_END;}
+[0-9]+      {yylval = atoi(yytext);return NUMBER;}
+-|\+|\*|;|\n|\r\n   {rowCount++;return *yytext;}
+[ \t]       ;
 
 
-//Braces
+ /*Braces*/
 \(          {return ROUND_START;}
 \)          {return ROUND_END;}
 \{          {return CURLY_START;}
 \}          {return CURLY_END;}
 
 
-.           {printf("Invalid Character");
-             return INVALID;}
+.           {printf("Invalid Character");return INVALID;}
 %%
 
-int yywrap(){}
-int main(int argc, char *argv[]){
+int yywrap(){
+    return 1;
+}
+/*int main(int argc, char *argv[]){
     if( argc != 2){
         printf("No or to many arguments supplied.\n");
         printf("Please use the program like this:\n");
@@ -54,4 +58,4 @@ int main(int argc, char *argv[]){
     yyin = fp;
     yylex(); 
     return 0;
-}
+}*/
