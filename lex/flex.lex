@@ -27,7 +27,7 @@ false       {return FALSE;}
 //Other stuff
 [A-Za-z]*   {return CHARS;}
 [0-9]*      {return NUMBER;}
-;           {rowCount++;return LINE_END;}
+;|\n|\r\n           {rowCount++;return LINE_END;}
 
 
 //Braces
