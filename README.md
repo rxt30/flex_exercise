@@ -1,10 +1,14 @@
 # Flex-Repository
 
-Repository for the lexical analyse with flex.
+Repository for making a compiler with flex and yacc
 If working on a new future/issue, please create your own branch and make a pull request after finishing it.
 
-### Compiling Flex-Code into C-Code
-The steps below are only suitable for a linux evironment, and require flex installed with your packet manager
-1. Compile the Flex-Code with `flex <filename>`
-2. Compile the C-File generated from the Flex-Code with `gcc <new file>`
-3. Run the program generated from the C-Compiler `./a.out`
+### Usage
+To build the project a c-compiler, flex, yacc and CMake are required.
+After installing all the required programs, simply clone the project.
+#### IDEs
+To open the project in a IDE, simply import the project by opening the project with the `CMakeLists.txt` file.
+Import was only tested with Clion
+#### CLI
+Simply build the project with `cmake --build .`.
+After that, start the compiler with `./Compiler`.
