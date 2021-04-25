@@ -2,3 +2,10 @@
 **.out
 **.txt
 build/
+CMake*
+!CMakeLists.txt
+cmake*
+[m|M]akefile
+Compiler*
+.idea
+Testing

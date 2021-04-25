@@ -1,5 +1,5 @@
 %{
-    #include "y.tab.h"
+    #include "syntax.h"
     #include <stdlib.h>
     int rowCount = 0;
     void yyerror(char *);
