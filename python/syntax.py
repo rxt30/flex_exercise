@@ -1,3 +1,4 @@
+import sys
 import ply.yacc as yacc
 from lexical import tokens
 
@@ -42,6 +43,13 @@ def p_error(p):
     print("Syntax error")
 
 parser = yacc.yacc()
-while True:
-    result = parser.parse(input("Please enter something:\n"))
-    print(result)
+if len(sys.argv) == 1:
+    while True:
+        result = parser.parse(input("Please enter something:\n"))
+        print(result)
+else:
+    f = open(sys.argv[1])
+    content = f.readlines()
+    for line in content:
+        parsed_line = parser.parse(line)
+        print(parsed_line)
