@@ -21,5 +21,6 @@ tokens = (
     'ROUND_START',
     'ROUND_END',
     'CURLY_START',
-    'CURLY_END'
+    'CURLY_END',
+    'COMMENT'
 )

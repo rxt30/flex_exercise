@@ -26,6 +26,7 @@ t_CURLY_END = r'\}'
 
 #Ignored Characters
 t_ignore = ' \t'
+t_ignore_COMMENT = r'\#.*'
 
 #Token with a function
 def t_NUMBER(t):
@@ -36,6 +37,7 @@ def t_NUMBER(t):
 def t_newline(t):
     r'\n+'
     t.lexer.lineno += len(t.value)
+
 
 #Error handling
 def t_error(t):
