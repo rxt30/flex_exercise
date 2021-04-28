@@ -7,8 +7,12 @@ def p_expression_plus(p):
     p[0] = p[1] + p[3]
 
 def p_expression_minus(p):
-    'expression : expression MINUS term'
-    p[0] = p[1] - p[3]
+    '''expression : expression MINUS term
+                | MINUS term'''
+    if len(p) == 4:
+        p[0] = p[1] - p[3]
+    else:
+        p[0] = -1*p[2]
 
 def p_expression_braces(p):
     'expression : ROUND_START expression ROUND_END'
@@ -31,8 +35,12 @@ def p_term_expression_single(p):
     p[0] = (p[2])
 
 def p_term_number(p):
-    'term : NUMBER'
-    p[0] = p[1]
+    '''term : NUMBER
+            | MINUS NUMBER'''
+    if len(p) == 2:
+        p[0] = p[1]
+    else:
+        p[0] = -1*p[2]
 
 def p_term_chars(p):
     'term : CHARS'
