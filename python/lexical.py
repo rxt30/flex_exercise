@@ -39,7 +39,7 @@ def t_newline(t):
 
 #Error handling
 def t_error(t):
-    print("Illegal character " + t.value[0])
+    print("Illegal character " + t.value[0] + " on line " + str(t.lexer.lineno))
     t.lexer.skip(1)
 
 lexer = lex.lex()
