@@ -9,3 +9,6 @@ cmake*
 Compiler*
 .idea
 Testing
+__pycache__
+parser.out
+parsetab.py
