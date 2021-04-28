@@ -48,7 +48,9 @@ def p_term_chars(p):
 
 #Error handling
 def p_error(p):
-    print("Syntax error")
+    if p is not None:
+        print("Syntax error on line " + str(p.lineno) + "\n")
+
 
 parser = yacc.yacc()
 if len(sys.argv) == 1:
@@ -59,5 +61,7 @@ else:
     f = open(sys.argv[1])
     content = f.readlines()
     for line in content:
+        print(line, end="")
         parsed_line = parser.parse(line)
-        print(parsed_line)
+        if parsed_line is not None:
+            print("parsed to " + str(parsed_line) + "\n")
