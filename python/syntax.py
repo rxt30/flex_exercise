@@ -18,20 +18,28 @@ def p_expression_term(p):
     p[0] = p[1]
 
 def p_term_multiplication(p):
-    'term : term MULTIPLICATION NUMBER'
+    'term : term MULTIPLICATION term'
     p[0] = p[1] * p[3]
 
-def p_term_braces(p):
-    'term : ROUND_START term ROUND_END'
+def p_term_expression(p):
+    'term : ROUND_START expression ROUND_END MULTIPLICATION term'
+    p[0] = (p[2]) * p[5]
+
+def p_term_expression_single(p):
+    'term : ROUND_START expression ROUND_END'
     p[0] = (p[2])
 
 def p_term_number(p):
     'term : NUMBER'
     p[0] = p[1]
 
+def p_term_chars(p):
+    'term : CHARS'
+    p[0] = p[1]
+
 #Error handling
 def p_error(p):
-    print("Syntax error in input")
+    print("Syntax error")
 
 parser = yacc.yacc()
 while True:
