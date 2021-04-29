@@ -1,5 +1,5 @@
 import ply.lex as lex
-from tokens import tokens
+from tokens.tokens import tokens
 
 t_INTEGER = r'int'
 t_STRING = r'string'
