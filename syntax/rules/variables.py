@@ -29,10 +29,17 @@ def p_variable_reassign(p):
                 | CHARS ASSIGNMENT QUOTED_CHARS
                 | CHARS ASSIGNMENT TRUE
                 | CHARS ASSIGNMENT FALSE'''
-    if p[1] in savedVariables and type(p[3]) == type(savedVariables[p[1]]):
-        savedVariables.update({p[1] : p[3]})
-    else:
+    if not (p[1] in savedVariables and type(p[3]) == type(savedVariables[p[1]])):
         print("Wrong dataType for reassignment")
         print("Syntax error on line " + str(p.lineno(1)) + "\n")
         raise SyntaxError
+
+    savedVariableType = type(savedVariables[p[1]])
+    if savedVariableType is str:
+        savedVariables.update({p[1] : p[3].strip("'\"")})
+    elif savedVariableType is bool:
+        savedVariables.update({p[1] : p[3] == "true"})
+    elif savedVariableType is int:
+        savedVariables.update({p[1] : p[3]})
+
     print(savedVariables)
