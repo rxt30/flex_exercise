@@ -16,6 +16,11 @@ t_ASSIGNMENT = r'='
 t_MINUS = r'-'
 t_MULTIPLICATION = r'\*'
 
+t_LEFT_GREATER = r'\>'
+t_RIGHT_GREATER = r'\<'
+t_EQUAL = r'=='
+t_NOT_EQUAL = r'!='
+
 t_ROUND_START = r'\('
 t_ROUND_END = r'\)'
 t_CURLY_START = r'\{'

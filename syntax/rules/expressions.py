@@ -25,3 +25,20 @@ def p_expression_variable(p):
 def p_expression_int(p):
     'expression : INTEGER'
     print("I am a int")
+
+
+
+
+# IF ELSE STATEMENT
+
+def p_if_statement(p):
+    'expression : IF ROUND_START condition ROUND_END CURLY_START expression CURLY_END'
+    if p[3]:
+        p[0] = p[6]
+
+def p_if_else_statement(p):
+    'expression : IF ROUND_START condition ROUND_END CURLY_START expression CURLY_END ELSE CURLY_START expression CURLY_END'
+    if p[3]:
+        p[0] = p[6]
+    else:
+        p[0] = p[10]
