@@ -6,8 +6,8 @@ reserved = {
     'else' : 'ELSE',
     'for' : 'FOR',
     'while' : 'WHILE',
-    'true' : 'true',
-    'false' : 'false'
+    'true' : 'TRUE',
+    'false' : 'FALSE'
 }
 
 tokens = [
@@ -21,6 +21,7 @@ tokens = [
     'RIGHT_GREATER',
     'LEFT_GREATER',
     'CHARS',
+    'QUOTED_CHARS',
     'NUMBER',
     'ROUND_START',
     'ROUND_END',

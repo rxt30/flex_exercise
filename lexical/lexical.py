@@ -1,13 +1,6 @@
 import ply.lex as lex
 from tokens.tokens import tokens, reserved
 
-t_INTEGER = r'int'
-t_STRING = r'string'
-t_BOOLEAN = r'bool'
-
-t_IF = r'if'
-t_FOR = r'for'
-t_WHILE = r'while'
 t_OR = r'\|\|'
 t_AND = r'&&'
 
@@ -21,6 +14,7 @@ t_ROUND_END = r'\)'
 t_CURLY_START = r'\{'
 t_CURLY_END = r'\}'
 
+t_QUOTED_CHARS = r'(\"|\').+(\"|\')'
 #Ignored Characters
 t_ignore = ' \t'
 t_ignore_COMMENT = r'\#.*'
