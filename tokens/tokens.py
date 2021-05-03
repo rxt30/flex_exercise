@@ -23,6 +23,7 @@ tokens = [
     'RIGHT_GREATER',
     'LEFT_GREATER',
     'CHARS',
+    'QUOTED_CHARS',
     'NUMBER',
     'ROUND_START',
     'ROUND_END',
