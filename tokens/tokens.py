@@ -1,12 +1,16 @@
-tokens = (
-    'INTEGER',
-    'STRING',
-    'BOOLEAN',
-    'IF',
-    'FOR',
-    'WHILE',
-    'TRUE',
-    'FALSE',
+reserved = {
+    'int' : 'INTEGER',
+    'string' : 'STRING',
+    'bool' : 'BOOLEAN',
+    'if' : 'IF',
+    'else' : 'ELSE',
+    'for' : 'FOR',
+    'while' : 'WHILE',
+    'true' : 'true',
+    'false' : 'false'
+}
+
+tokens = [
     'OR',
     'AND',
     'ASSIGNMENT',
@@ -23,4 +27,4 @@ tokens = (
     'CURLY_START',
     'CURLY_END',
     'COMMENT'
-)
+] + list(reserved.values())

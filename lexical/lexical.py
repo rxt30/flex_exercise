@@ -1,5 +1,5 @@
 import ply.lex as lex
-from tokens.tokens import tokens
+from tokens.tokens import tokens, reserved
 
 t_INTEGER = r'int'
 t_STRING = r'string'
@@ -8,8 +8,6 @@ t_BOOLEAN = r'bool'
 t_IF = r'if'
 t_FOR = r'for'
 t_WHILE = r'while'
-t_TRUE = r'true'
-t_FALSE = r'false'
 t_OR = r'\|\|'
 t_AND = r'&&'
 
@@ -17,7 +15,6 @@ t_PLUS = r'\+'
 t_ASSIGNMENT = r'='
 t_MINUS = r'-'
 t_MULTIPLICATION = r'\*'
-t_CHARS = r'[A-Za-z]+'
 
 t_ROUND_START = r'\('
 t_ROUND_END = r'\)'
@@ -32,6 +29,11 @@ t_ignore_COMMENT = r'\#.*'
 def t_NUMBER(t):
     r'\d+'
     t.value = int(t.value)
+    return t
+
+def t_CHARS(t):
+    r'[A-Za-z]+'
+    t.type = reserved.get(t.value,'CHARS')
     return t
 
 def t_newline(t):

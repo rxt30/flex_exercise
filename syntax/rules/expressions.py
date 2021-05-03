@@ -17,3 +17,11 @@ def p_expression_braces(p):
 def p_expression_term(p):
     'expression : term'
     p[0] = p[1]
+
+def p_expression_variable(p):
+    'expression : variable'
+    p[0] = p[1]
+
+def p_expression_int(p):
+    'expression : INTEGER'
+    print("I am a int")
