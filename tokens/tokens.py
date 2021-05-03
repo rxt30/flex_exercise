@@ -6,8 +6,10 @@ reserved = {
     'else' : 'ELSE',
     'for' : 'FOR',
     'while' : 'WHILE',
-    'true' : 'true',
-    'false' : 'false'
+    'true' : 'TRUE',
+    'false' : 'FALSE',
+    '==' : 'EQUAL',
+    '!=' : 'NOT_EQUAL'
 }
 
 tokens = [
