@@ -19,7 +19,7 @@ t_ROUND_END = r'\)'
 t_CURLY_START = r'\{'
 t_CURLY_END = r'\}'
 
-t_QUOTED_CHARS = r'(\"|\').+(\"|\')'
+t_QUOTED_CHARS = r'(\"[^\"]+\")|(\'[^\']+\')'
 #Ignored Characters
 t_ignore = ' \t'
 t_ignore_COMMENT = r'\#.*'

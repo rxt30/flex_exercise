@@ -19,5 +19,5 @@ def p_term_number(p):
         p[0] = -1*p[2]
 
 def p_term_chars(p):
-    'term : CHARS'
-    p[0] = p[1]
+    'term : QUOTED_CHARS'
+    p[0] = p[1].strip("\"'")
