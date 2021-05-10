@@ -1,4 +1,5 @@
-savedVariables = {}
+#savedVariables = {}
+from syntax.rules.savedVariables import savedVariables
 
 def p_variable_int(p):
     'variable : INTEGER CHARS ASSIGNMENT expression'
