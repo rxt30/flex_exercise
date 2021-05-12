@@ -1,7 +1,9 @@
-savedVariables = {}
+#savedVariables = {}
+from syntax.rules.savedVariables import savedVariables
 
 def p_variable_int(p):
-    'variable : INTEGER CHARS ASSIGNMENT expression'
+    '''variable : INTEGER CHARS ASSIGNMENT expression
+                | INTEGER CHARS ASSIGNMENT varConcat'''
     if type(p[4]) is not int:
         print("Wrong dataType")
         print("Syntax error on line " + str(p.lineno(1)) + "\n")
@@ -10,7 +12,8 @@ def p_variable_int(p):
     print(savedVariables)
 
 def p_variable_string(p):
-    'variable : STRING CHARS ASSIGNMENT expression'
+    '''variable : STRING CHARS ASSIGNMENT expression
+                | STRING CHARS ASSIGNMENT varConcat'''
     if type(p[4]) is not str:
         print("Wrong dataType for Assignment")
         print("Syntax error on line " + str(p.lineno(1)) + "\n")
@@ -49,3 +52,8 @@ def p_variable_reassign_bool(p):
     else:
         savedVariables.update({p[1] : p[3] == "true"})
         print(savedVariables)
+
+def p_variable_varConcat(p):
+    'variable : CHARS ASSIGNMENT varConcat'
+    savedVariables.update({p[1] : p[3]})
+    print(savedVariables)
