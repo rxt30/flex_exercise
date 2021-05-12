@@ -31,7 +31,7 @@ def t_NUMBER(t):
     return t
 
 def t_CHARS(t):
-    r'[A-Za-z]+'
+    r'[A-Za-zß]+'
     t.type = reserved.get(t.value,'CHARS')
     return t
 
