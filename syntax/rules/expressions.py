@@ -1,3 +1,18 @@
+def p_statements(p):
+    """statements : statement END_OF_STATEMENT"""
+    p[0] = p[1]
+
+# import muss für korrekte Logik nach p_statements stehen
+import numpy as np
+
+def p_statements2(p):
+    """statements : statement END_OF_STATEMENT statements"""
+    p[0] = np.hstack((p[1], p[3]))
+
+def p_statement(p):
+    """statement : expression"""
+    p[0] = p[1]
+
 def p_expression_plus(p):
     'expression : expression PLUS term'
     p[0] = p[1] + p[3]

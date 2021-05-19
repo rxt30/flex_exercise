@@ -11,8 +11,8 @@ if len(sys.argv) == 1:
 else:
     f = open(sys.argv[1])
     content = f.readlines()
+    code = ''
     for line in content:
-        print(line, end="")
-        parsed_line = parser.parse(line)
-        if parsed_line is not None:
-            print("parsed to " + str(parsed_line) + "\n")
+        code += line
+    result = parser.parse(code)
+    print(result)
