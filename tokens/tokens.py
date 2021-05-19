@@ -9,9 +9,7 @@ reserved = {
     'true' : 'TRUE',
     'false' : 'FALSE',
     '==' : 'EQUAL',
-    '!=' : 'NOT_EQUAL',
-    '\/\/' : 'DIVISION_WITH_NO_REMAINDER'
-
+    '!=' : 'NOT_EQUAL'
 }
 
 tokens = [

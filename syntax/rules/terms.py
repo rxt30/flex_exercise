@@ -12,9 +12,9 @@ def p_term_diviosion(p):
         raise SyntaxError
 
 def p_term_diviosion_with_no_remainder(p):
-    'term : term DIVISION_WITH_NO_REMAINDER'
+    'term : term DIVISION DIVISION term'
     if p[3] != 0:
-        p[0] = p[1] // p[3]
+        p[0] = p[1] // p[4]
     else:
         print("The denominator can not be zero")
         print("Syntax error on line " +str(line)+ "\n")
