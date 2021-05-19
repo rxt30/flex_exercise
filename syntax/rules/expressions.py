@@ -49,12 +49,12 @@ def p_expression_int(p):
 # IF ELSE STATEMENT
 
 def p_if_statement(p):
-    'expression : IF ROUND_START condition ROUND_END CURLY_START expression CURLY_END'
+    'expression : IF ROUND_START condition ROUND_END CURLY_START statements CURLY_END'
     if p[3]:
         p[0] = p[6]
 
 def p_if_else_statement(p):
-    'expression : IF ROUND_START condition ROUND_END CURLY_START expression CURLY_END ELSE CURLY_START expression CURLY_END'
+    'expression : IF ROUND_START condition ROUND_END CURLY_START statements CURLY_END ELSE CURLY_START statements CURLY_END'
     if p[3]:
         p[0] = p[6]
     else:
