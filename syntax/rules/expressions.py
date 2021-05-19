@@ -1,3 +1,21 @@
+def p_single_statement(p):
+    """statements : statement"""
+    p[0] = p[1]
+
+def p_statements(p):
+    """statements : statement statements"""
+    p[0] = np.hstack((p[1], p[2]))
+
+def p_statement(p):
+    """statement  : expression END_OF_STATEMENT
+                  | if_statement"""
+    p[0] = p[1]
+
+# import muss für korrekte Logik nach p_statements stehen
+import numpy as np
+
+
+
 def p_expression_plus(p):
     'expression : expression PLUS term'
     p[0] = p[1] + p[3]
@@ -32,12 +50,12 @@ def p_expression_int(p):
 # IF ELSE STATEMENT
 
 def p_if_statement(p):
-    'expression : IF ROUND_START condition ROUND_END CURLY_START expression CURLY_END'
+    'if_statement : IF ROUND_START condition ROUND_END CURLY_START statements CURLY_END'
     if p[3]:
         p[0] = p[6]
 
 def p_if_else_statement(p):
-    'expression : IF ROUND_START condition ROUND_END CURLY_START expression CURLY_END ELSE CURLY_START expression CURLY_END'
+    'if_statement : IF ROUND_START condition ROUND_END CURLY_START statements CURLY_END ELSE CURLY_START statements CURLY_END'
     if p[3]:
         p[0] = p[6]
     else:
