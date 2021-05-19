@@ -1,3 +1,5 @@
+from syntax.rules.savedVariables import *
+
 def p_term_multiplication(p):
     'term : term MULTIPLICATION term'
     p[0] = p[1] * p[3]
@@ -21,3 +23,7 @@ def p_term_number(p):
 def p_term_chars(p):
     'term : QUOTED_CHARS'
     p[0] = p[1].strip("\"'")
+
+def p_term_variable(p):
+    'term : CHARS'
+    p[0] = getVariable(p[1], p.lineno(1))
