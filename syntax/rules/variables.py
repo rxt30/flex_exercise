@@ -52,8 +52,3 @@ def p_variable_reassign_bool(p):
     else:
         savedVariables.update({p[1] : p[3] == "true"})
         print(savedVariables)
-
-#def p_variable_varConcat(p):
-#    'variable : CHARS ASSIGNMENT varConcat'
-#    savedVariables.update({p[1] : p[3]})
-#    print(savedVariables)
