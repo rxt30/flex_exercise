@@ -4,10 +4,12 @@ from tokens.tokens import tokens, reserved
 t_OR = r'\|\|'
 t_AND = r'&&'
 
-t_PLUS = r'\+'
 t_ASSIGNMENT = r'='
+t_PLUS = r'\+'
 t_MINUS = r'-'
 t_MULTIPLICATION = r'\*'
+t_DIVISION = r'\/'
+t_MODULO = r'%'
 
 t_LEFT_GREATER = r'\>'
 t_RIGHT_GREATER = r'\<'

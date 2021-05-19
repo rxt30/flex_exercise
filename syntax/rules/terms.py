@@ -2,6 +2,33 @@ def p_term_multiplication(p):
     'term : term MULTIPLICATION term'
     p[0] = p[1] * p[3]
 
+def p_term_diviosion(p):
+    'term : term DIVISION term'
+    if p[3] != 0:
+        p[0] = p[1] / p[3]
+    else:
+        print("The denominator can not be zero")
+        print("Syntax error on line " +str(line)+ "\n")
+        raise SyntaxError
+
+def p_term_diviosion_with_no_remainder(p):
+    'term : term DIVISION_WITH_NO_REMAINDER'
+    if p[3] != 0:
+        p[0] = p[1] // p[3]
+    else:
+        print("The denominator can not be zero")
+        print("Syntax error on line " +str(line)+ "\n")
+        raise SyntaxError
+
+def p_term_modulo(p):
+    'term : term MODULO term'
+    if p[3] != 0:
+        p[0] = p[1] % p[3]
+    else:
+        print("The denominator can not be zero")
+        print("Syntax error on line " +str(line)+ "\n")
+        raise SyntaxError
+
 def p_term_expression(p):
     'term : ROUND_START expression ROUND_END MULTIPLICATION term'
     p[0] = (p[2]) * p[5]

@@ -9,7 +9,9 @@ reserved = {
     'true' : 'TRUE',
     'false' : 'FALSE',
     '==' : 'EQUAL',
-    '!=' : 'NOT_EQUAL'
+    '!=' : 'NOT_EQUAL',
+    '\/\/' : 'DIVISION_WITH_NO_REMAINDER'
+
 }
 
 tokens = [
@@ -19,6 +21,8 @@ tokens = [
     'PLUS',
     'MULTIPLICATION',
     'MINUS',
+    'DIVISION',
+    'MODULO',
     'INVERSE',
     'RIGHT_GREATER',
     'LEFT_GREATER',
