@@ -8,7 +8,7 @@ def p_term_diviosion(p):
         p[0] = p[1] / p[3]
     else:
         print("The denominator can not be zero")
-        print("Syntax error on line " +str(line)+ "\n")
+        #print("Syntax error on line " +str(line)+ "\n")
         raise SyntaxError
 
 def p_term_diviosion_with_no_remainder(p):
@@ -17,7 +17,7 @@ def p_term_diviosion_with_no_remainder(p):
         p[0] = p[1] // p[4]
     else:
         print("The denominator can not be zero")
-        print("Syntax error on line " +str(line)+ "\n")
+        #print("Syntax error on line " +str(line)+ "\n")
         raise SyntaxError
 
 def p_term_modulo(p):
@@ -26,7 +26,7 @@ def p_term_modulo(p):
         p[0] = p[1] % p[3]
     else:
         print("The denominator can not be zero")
-        print("Syntax error on line " +str(line)+ "\n")
+        #äprint("Syntax error on line " +str(line)+ "\n")
         raise SyntaxError
 
 def p_term_expression(p):
