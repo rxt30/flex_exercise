@@ -27,8 +27,8 @@ def p_variable_bool(p):
     savedVariables.update({p[2] : p[4] == "true"})
     print(savedVariables)
 
-def p_variable_reassign(p):
-    'variable : CHARS ASSIGNMENT expression'
+def p_variable_varConcat(p):
+    'variable : CHARS ASSIGNMENT varConcat'
     if not (p[1] in savedVariables and type(p[3]) == type(savedVariables[p[1]])):
         print("Wrong dataType for reassignment")
         print("Syntax error on line " + str(p.lineno(1)) + "\n")
@@ -53,7 +53,7 @@ def p_variable_reassign_bool(p):
         savedVariables.update({p[1] : p[3] == "true"})
         print(savedVariables)
 
-def p_variable_varConcat(p):
-    'variable : CHARS ASSIGNMENT varConcat'
-    savedVariables.update({p[1] : p[3]})
-    print(savedVariables)
+#def p_variable_varConcat(p):
+#    'variable : CHARS ASSIGNMENT varConcat'
+#    savedVariables.update({p[1] : p[3]})
+#    print(savedVariables)
