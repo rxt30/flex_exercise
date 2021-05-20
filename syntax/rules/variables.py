@@ -31,13 +31,16 @@ def p_variable_bool(p):
 def p_variable_varConcat(p):
     'variable : CHARS ASSIGNMENT expression'
     if not (p[1] in savedVariables and type(p[3]) == type(savedVariables[p[1]])):
-        wrong_reassignment_error(p)
+        if not (type(p[3]) is (float or int) and type(savedVariables[p[1]] is (float or int))):
+            wrong_reassignment_error(p)
 
     savedVariableType = type(savedVariables[p[1]])
     if savedVariableType is str:
         savedVariables.update({p[1] : p[3].strip("'\"")})
     elif savedVariableType is int:
-        savedVariables.update({p[1] : p[3]})
+        savedVariables.update({p[1] : int(p[3])})
+    elif savedVariableType is float:
+        savedVariables.update({p[1] : float(p[3])})
 
     print(savedVariables)
 
