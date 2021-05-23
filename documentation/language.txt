@@ -10,7 +10,7 @@ Integers:
 Integers can exist out of the numbers 0-9.
 
 Float:
-A Floating Number can exist of a normal integer number with as many decimal places as you mant. For the decimal places you can use the numbers 0-9. To 
+A Floating Number can exist of a normal integer number with as many decimal places as you mant. For the decimal places you can use the numbers 0-9. To split the integer and the decimal places the symbol "." is used.
 
 Variables:
 To initalize a variable of your liking please use this syntax:
