@@ -21,6 +21,4 @@ The lexical and syntax analysis will be imported from their respecting folders.
 ### Documentation
 
 All the documentation for this compiler can be foun in the directory 'documentation'
-If you want to have a look at the language the compiler can work with you can look into the file 'documentation/language.txt'.
-The track of this project and the current status can the found in the file 'documentation/current_implementation.xlsx'. 
-
+If you want to have a look at the current status and the future plans, just visit the file 'current_implementation.xlsx'.
