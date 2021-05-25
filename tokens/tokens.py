@@ -1,5 +1,6 @@
 reserved = {
     'int' : 'INTEGER',
+    'float' : 'FLOAT',
     'string' : 'STRING',
     'bool' : 'BOOLEAN',
     'if' : 'IF',
