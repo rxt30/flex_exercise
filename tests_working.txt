@@ -6,7 +6,7 @@ int zwanzig = 20;
 int demo = 13;
 float test = 13.09;
 string beispiel = "Demo";
-boolean example = true;
+bool example = true;
 
 # Updaten von Variablen
 zehn = 10;
@@ -39,7 +39,8 @@ zwanzig%demo;
 beispiel+"z";
 
 # Logische Operationen
-example && false;
+example&&false;
+example && true;
 true && example;
 true || example;
 example || false;
