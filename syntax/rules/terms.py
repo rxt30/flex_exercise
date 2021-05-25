@@ -4,7 +4,7 @@ def p_term_multiplication(p):
     'term : term MULTIPLICATION term'
     p[0] = p[1] * p[3]
 
-def p_term_diviosion(p):
+def p_term_division(p):
     'term : term DIVISION term'
     if p[3] != 0:
         p[0] = p[1] / p[3]
@@ -13,7 +13,7 @@ def p_term_diviosion(p):
         #print("Syntax error on line " +str(line)+ "\n")
         raise SyntaxError
 
-def p_term_diviosion_with_no_remainder(p):
+def p_term_division_with_no_remainder(p):
     'term : term DIVISION DIVISION term'
     if p[3] != 0:
         p[0] = p[1] // p[4]
