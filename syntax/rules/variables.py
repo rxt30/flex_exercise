@@ -31,7 +31,7 @@ def p_variable_bool(p):
 def p_variable_varConcat(p):
     'variable : CHARS ASSIGNMENT expression'
     if not (p[1] in savedVariables and type(p[3]) == type(savedVariables[p[1]])):
-        if not (type(p[3]) is (float or int) and type(savedVariables[p[1]] is (float or int))):
+        if not (type(p[3]) is float and type(savedVariables[p[1]] is (float or int))):
             wrong_reassignment_error(p)
 
     savedVariableType = type(savedVariables[p[1]])
