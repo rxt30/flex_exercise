@@ -1,58 +1,58 @@
 #Dies ist eine Datei zum Testen des aktuellen Funktionsumfangs
 
 #Initalisieren von Variablen
-int zehn = 9;
-int zwanzig = 20;
-int demo = 13;
-float test = 13.09;
-string beispiel = "Demo";
-boolean example = true;
+int zehn = 9
+int zwanzig = 20
+int demo = 13
+float test = 13.09
+string beispiel = "Demo"
+boolean example = true
 
 # Updaten von Variablen
-zehn = 10;
-test = 12.08;
-beispiel = "emo";
-example = false;
+zehn = 10
+test = 12.08
+beispiel = "emo"
+example = false
 
 # Rechenoperationen von Zahlen
-1 + 2;
-1+2;
-1*2;
-3/2;
-3//2;
-3%2;
-(1+2)*3;
-1+2*3;
-1+(2*3);
+1 + 2
+1+2
+1*2
+3/2
+3//2
+3%2
+(1+2)*3
+1+2*3
+1+(2*3)
 
 # Rechenoperationen von Variablen
-zehn+zwanzig;
-10+zwanzig;
-zehn*zwanzig;
-zwanzig/demo;
-zwanzig//demo;
-zwanzig%demo;
+zehn+zwanzig
+10+zwanzig
+zehn*zwanzig
+zwanzig/demo
+zwanzig//demo
+zwanzig%demo
 
 # Anhängen von Strings
-"D"+beispiel;
-"D"+"emo";
-beispiel+"z";
+"D"+beispiel
+"D"+"emo"
+beispiel+"z"
 
 # Logische Operationen
-example && false;
-true && example;
-true || example;
-example || false;
-true == example;
-example == false;
-9 == 10;
-true != example;
-example != false;
-9 != 10;
-9 < 10;
-10 < 9;
-9 > 10;
-10 > 9;
+example && false
+true && example
+true || example
+example || false
+true == example
+example == false
+9 == 10
+true != example
+example != false
+9 != 10
+9 < 10
+10 < 9
+9 > 10
+10 > 9
 
 # if
 
