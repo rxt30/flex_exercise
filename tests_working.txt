@@ -56,8 +56,31 @@ example != false;
 10 > 9;
 
 # if
-
+if(true){1+2;}
+if(false){1+2;}
+if(true){
+    1+2;
+}
+if(false){
+    1+2
+}
+if(true){1+2;}else{1-2;}
+if(false){1+2;}else{1-2;}
+if(true){
+    1+2;
+}else{
+    1-2;
+}
+if(false){
+    1+2;
+}else{
+    1-2;
+}
 
 # for
 
+
 # while
+
+
+
