@@ -34,15 +34,6 @@ def p_expression_term(p):
     'expression : term'
     p[0] = p[1]
 
-# def p_expression_variable(p):
-#     'expression : variable'
-#     p[0] = p[1]
-
-# TODO: check if still needed
-def p_expression_int(p):
-    'expression : INTEGER'
-    print("I am a int")
-
 def p_expression_condition(p):
     'expression : condition'
     p[0] = p[1]

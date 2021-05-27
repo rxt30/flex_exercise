@@ -1,3 +1,4 @@
+from error_handling.error import wrong_assignment_error, wrong_reassignment_error
 from syntax.rules.savedVariables import savedVariables, getVariable
 
 
@@ -27,6 +28,26 @@ def execute(tree):
 
     if tree[0] == 'MOD':
         return execute(tree[1]) % execute(tree[2])
+
+    # conditions
+    if tree[0] == 'EQUAL':
+        return execute(tree[1]) == execute(tree[2])
+
+    if tree[0] == 'NOT_EQUAL':
+        return execute(tree[1]) != execute(tree[2])
+
+    if tree[0] == 'LEFT_GREATER':
+        return execute(tree[1]) > execute(tree[2])
+
+    if tree[0] == 'RIGHT_GREATER':
+        return execute(tree[1]) < execute(tree[2])
+
+    if tree[0] == 'AND':
+        return execute(tree[1]) & execute(tree[2])
+
+    if tree[0] == 'OR':
+        return execute(tree[1]) | execute(tree[2])
+
 
     # if statements
     if tree[0] == 'IF':
@@ -60,16 +81,15 @@ def execute(tree):
         return 'LOOP-END'
 
 
-    ### variables # TODO: error handling for existing variables?
+    ### variables
 
     # resolve variable
     if tree[0] == "VAR":
         return getVariable(tree[1], tree[2])
 
     # integer assignment
-    # TODO: Feature: auto type conversion
     if tree[0] == 'ASSIGNMENT_INT':
-        if type(execute(tree[2])) is not float:
+        if not isinstance(execute(tree[2]), (float, int)):
             wrong_assignment_error(tree[3])
         savedVariables.update({tree[1]: int(execute(tree[2]))})
         print(savedVariables)
@@ -77,7 +97,7 @@ def execute(tree):
 
     # float assignment
     if tree[0] == 'ASSIGNMENT_FLOAT':
-        if type(execute(tree[2])) is not float:
+        if not isinstance(execute(tree[2]), (float, int)):
             wrong_assignment_error(tree[3])
         savedVariables.update({tree[1]: float(execute(tree[2]))})
         print(savedVariables)
@@ -102,7 +122,7 @@ def execute(tree):
     # reassignment
     if tree[0] == 'REASSIGNMENT':
         if not (tree[1] in savedVariables and type(execute(tree[2])) == type(savedVariables[tree[1]])):
-            if not (type(execute(tree[2])) is float and type(savedVariables[tree[1]] is (float or int))):
+            if not(isinstance(execute(tree[3]), (float, int)) and isinstance(savedVariables[tree[1]], (float, int))):
                 wrong_reassignment_error(tree[3])
 
         savedVariableType = type(savedVariables[tree[1]])
@@ -119,14 +139,3 @@ def execute(tree):
         return 'REASSIGNMENT-END'
 
     return 'error'
-
-
-def wrong_assignment_error(line):
-    print("Wrong dataType for assignment")
-    print("Syntax error on line " + str(line) + "\n")
-    raise SyntaxError
-
-def wrong_reassignment_error(line):
-    print("Wrong dataType for reassignment")
-    print("Syntax error on line " + str(line) + "\n")
-    raise SyntaxError

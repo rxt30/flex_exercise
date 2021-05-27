@@ -1,4 +1,4 @@
-from syntax.rules.savedVariables import *
+# TODO: error handling auslagern
 
 def p_term_multiplication(p):
     'term : term MULTIPLICATION term'
