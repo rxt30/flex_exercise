@@ -53,4 +53,4 @@ def p_term_chars(p):
 
 def p_term_variable(p):
     'term : CHARS'
-    p[0] = getVariable(p[1], p.lineno(1))
+    p[0] = ['VAR', p[1], p.lineno(1)]

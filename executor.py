@@ -1,4 +1,4 @@
-from syntax.rules.savedVariables import savedVariables
+from syntax.rules.savedVariables import savedVariables, getVariable
 
 
 def execute(tree):
@@ -61,6 +61,10 @@ def execute(tree):
 
 
     ### variables # TODO: error handling for existing variables?
+
+    # resolve variable
+    if tree[0] == "VAR":
+        return getVariable(tree[1], tree[2])
 
     # integer assignment
     # TODO: Feature: auto type conversion
