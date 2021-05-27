@@ -1,0 +1,1 @@
+# In dieser Datei sollen Codestücke eingegeben werden, die nicht funktionieren sollten, und darauf getest werden
