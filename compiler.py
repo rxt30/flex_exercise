@@ -6,8 +6,11 @@ from executor import execute
 
 if len(sys.argv) == 1:
     while True:
-        result = parser.parse(input("Please enter something:\n"))
-        print(result)
+        syntaxTree = parser.parse(input("Please enter something:\n"))
+        print(syntaxTree)
+        for statement in syntaxTree:
+            result = execute(statement)
+            print(result)
 
 else:
     f = open(sys.argv[1])
