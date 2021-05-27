@@ -3,8 +3,13 @@ def wrong_assignment_error(line):
     print("Syntax error on line " + str(line) + "\n")
     raise SyntaxError
 
-
 def wrong_reassignment_error(line):
     print("Wrong dataType for reassignment")
     print("Syntax error on line " + str(line) + "\n")
     raise SyntaxError
+
+def denominator_error(line):
+    print("The denominator can not be zero")
+    print("Syntax error on line " + str(line) + "\n")
+    raise SyntaxError
+

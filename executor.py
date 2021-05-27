@@ -1,4 +1,4 @@
-from error_handling.error import wrong_assignment_error, wrong_reassignment_error
+from error_handling.error import wrong_assignment_error, wrong_reassignment_error, denominator_error
 from syntax.rules.savedVariables import savedVariables, getVariable
 
 
@@ -21,13 +21,22 @@ def execute(tree):
         return execute(tree[1]) * execute(tree[2])
 
     if tree[0] == 'DIV':
-        return execute(tree[1]) / execute(tree[2])
+        if tree[2] !=0:
+            return execute(tree[1]) / execute(tree[2])
+        else:
+            denominator_error(tree[3])
 
     if tree[0] == 'INTDIV':
-        return execute(tree[1]) // execute(tree[2])
+        if tree[2] !=0:
+            return execute(tree[1]) // execute(tree[2])
+        else:
+            denominator_error(tree[3])
 
     if tree[0] == 'MOD':
-        return execute(tree[1]) % execute(tree[2])
+        if tree[2] !=0:
+            return execute(tree[1]) % execute(tree[2])
+        else:
+            denominator_error(tree[3])
 
     # conditions
     if tree[0] == 'EQUAL':
