@@ -4,29 +4,25 @@ def p_single_statement(p):
 
 def p_statements(p):
     """statements : statement statements"""
-    p[0] = np.hstack((p[1], p[2]))
+    p[0] = p[1] + p[2]
 
 def p_statement(p):
     """statement  : expression END_OF_STATEMENT
                   | if_statement"""
-    p[0] = p[1]
-
-# import muss für korrekte Logik nach p_statements stehen
-import numpy as np
-
+    p[0] = [p[1]]
 
 
 def p_expression_plus(p):
     'expression : expression PLUS term'
-    p[0] = p[1] + p[3]
+    p[0] = ['PLUS', p[1], p[3]]
 
 def p_expression_minus(p):
-    '''expression : expression MINUS term
-                | MINUS term'''
-    if len(p) == 4:
-        p[0] = p[1] - p[3]
-    else:
-        p[0] = -1*p[2]
+    '''expression : expression MINUS term'''
+    p[0] = ['MINUS', p[1], p[3]]
+
+def p_expression_negation(p):
+    '''expression : MINUS term'''
+    p[0] = ['NEGATION', p[2]]
 
 def p_expression_braces(p):
     'expression : ROUND_START expression ROUND_END'
