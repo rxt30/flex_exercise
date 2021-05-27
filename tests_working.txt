@@ -39,7 +39,7 @@ zwanzig%demo;
 beispiel+"z";
 
 # Logische Operationen
-example&&false;
+example && false;
 example && true;
 true && example;
 true || example;
@@ -62,7 +62,7 @@ if(true){
     1+2;
 }
 if(false){
-    1+2
+    1+2;
 }
 if(true){1+2;}else{1-2;}
 if(false){1+2;}else{1-2;}
