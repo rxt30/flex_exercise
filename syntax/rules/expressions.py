@@ -8,7 +8,8 @@ def p_statements(p):
 
 def p_statement(p):
     """statement  : expression END_OF_STATEMENT
-                  | if_statement"""
+                  | if_statement
+                  | for_loop"""
     p[0] = [p[1]]
 
 
@@ -47,12 +48,16 @@ def p_expression_int(p):
 
 def p_if_statement(p):
     'if_statement : IF ROUND_START condition ROUND_END CURLY_START statements CURLY_END'
-    if p[3]:
-        p[0] = p[6]
+    p[0] = ['IF', p[3], p[6]]
 
 def p_if_else_statement(p):
     'if_statement : IF ROUND_START condition ROUND_END CURLY_START statements CURLY_END ELSE CURLY_START statements CURLY_END'
-    if p[3]:
-        p[0] = p[6]
-    else:
-        p[0] = p[10]
+    p[0] = ['IFELSE', p[3], p[6], p[10]]
+
+
+
+# FOR LOOP
+
+def p_for_loop(p):
+    'for_loop : FOR ROUND_START NUMBER ROUND_END CURLY_START statements CURLY_END'
+    p[0] = ['FOR', p[3], p[6]]
