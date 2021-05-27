@@ -1,48 +1,26 @@
 #savedVariables = {}
+import executor
 from syntax.rules.savedVariables import savedVariables
 
 def p_variable_int(p):
-    '''variable : INTEGER CHARS ASSIGNMENT expression'''
-    if type(p[4]) is not float:
-        wrong_assignment_error(p)
-    savedVariables.update({p[2] : int(p[4])})
-    print(savedVariables)
+    'variable : INTEGER CHARS ASSIGNMENT expression'
+    p[0] = ['ASSIGNMENT_INT', p[2], p[4], p.lineno(1)]
 
 def p_variable_float(p):
     'variable : FLOAT CHARS ASSIGNMENT expression'
-    if type(p[4]) is not float:
-        wrong_assignment_error(p)
-    savedVariables.update({p[2] : float(p[4])})
-    print(savedVariables)
+    p[0] = ['ASSIGNMENT_FLOAT', p[2], p[4], p.lineno(1)]
 
 def p_variable_string(p):
     'variable : STRING CHARS ASSIGNMENT expression'
-    if type(p[4]) is not str:
-        wrong_assignment_error(p)
-    savedVariables.update({p[2] : p[4].strip("'\"")})
-    print(savedVariables)
+    p[0] = ['ASSIGNMENT_STRING', p[2], p[4], p.lineno(1)]
 
 def p_variable_bool(p):
-    '''variable : BOOLEAN CHARS ASSIGNMENT TRUE
-                | BOOLEAN CHARS ASSIGNMENT FALSE'''
-    savedVariables.update({p[2] : p[4] == "true"})
-    print(savedVariables)
+    'variable : BOOLEAN CHARS ASSIGNMENT condition'
+    p[0] = ['ASSIGNMENT_BOOL', p[2], p[4], p.lineno(1)]
 
 def p_variable_varConcat(p):
     'variable : CHARS ASSIGNMENT expression'
-    if not (p[1] in savedVariables and type(p[3]) == type(savedVariables[p[1]])):
-        if not (type(p[3]) is float and type(savedVariables[p[1]] is (float or int))):
-            wrong_reassignment_error(p)
-
-    savedVariableType = type(savedVariables[p[1]])
-    if savedVariableType is str:
-        savedVariables.update({p[1] : p[3].strip("'\"")})
-    elif savedVariableType is int:
-        savedVariables.update({p[1] : int(p[3])})
-    elif savedVariableType is float:
-        savedVariables.update({p[1] : float(p[3])})
-
-    print(savedVariables)
+    p[0] = ['REASSIGNMENT', p[1], p[3], p.lineno(1)]
 
 def p_variable_reassign_bool(p):
     '''variable : CHARS ASSIGNMENT TRUE
@@ -53,10 +31,10 @@ def p_variable_reassign_bool(p):
     print(savedVariables)
 
 
-def wrong_assignment_error(p):
-    print("Wrong dataType for assignment")
-    print("Syntax error on line " + str(p.lineno(1)) + "\n")
-    raise SyntaxError
+# def wrong_assignment_error(p):
+#     print("Wrong dataType for assignment")
+#     print("Syntax error on line " + str(p.lineno(1)) + "\n")
+#     raise SyntaxError
 
 def wrong_reassignment_error(p):
     print("Wrong dataType for reassignment")
