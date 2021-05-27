@@ -1,13 +1,13 @@
-from syntax.rules.savedVariables import *
+# TODO: error handling auslagern
 
 def p_term_multiplication(p):
     'term : term MULTIPLICATION term'
-    p[0] = p[1] * p[3]
+    p[0] = ['MULT', p[1], p[3]]
 
 def p_term_division(p):
     'term : term DIVISION term'
     if p[3] != 0:
-        p[0] = p[1] / p[3]
+        p[0] = ['DIV', p[1], p[3]]
     else:
         print("The denominator can not be zero")
         print("Syntax error on line " +str(p.lineno(1))+ "\n")
@@ -16,7 +16,7 @@ def p_term_division(p):
 def p_term_division_with_no_remainder(p):
     'term : term DIVISION DIVISION term'
     if p[4] != 0:
-        p[0] = p[1] // p[4]
+        p[0] = ['INTDIV', p[1], p[4]]
     else:
         print("The denominator can not be zero")
         print("Syntax error on line " +str(p.lineno(1))+ "\n")
@@ -25,7 +25,7 @@ def p_term_division_with_no_remainder(p):
 def p_term_modulo(p):
     'term : term MODULO term'
     if p[3] != 0:
-        p[0] = p[1] % p[3]
+        p[0] = ['MOD', p[1], p[3]]
     else:
         print("The denominator can not be zero")
         print("Syntax error on line " +str(p.lineno(1))+ "\n")
@@ -33,7 +33,7 @@ def p_term_modulo(p):
 
 def p_term_expression(p):
     'term : ROUND_START expression ROUND_END MULTIPLICATION term'
-    p[0] = (p[2]) * p[5]
+    p[0] = ['MULT', p[2], p[5]]
 
 def p_term_expression_single(p):
     'term : ROUND_START expression ROUND_END'
@@ -53,4 +53,4 @@ def p_term_chars(p):
 
 def p_term_variable(p):
     'term : CHARS'
-    p[0] = getVariable(p[1], p.lineno(1))
+    p[0] = ['VAR', p[1], p.lineno(1)]
