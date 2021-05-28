@@ -2,8 +2,8 @@ from error_handling.error import wrong_assignment_error, wrong_reassignment_erro
 from syntax.rules.savedVariables import savedVariables, getVariable
 
 
-def execute_tree(syntaxTree):
-    for statement in syntaxTree:
+def execute_tree(syntax_tree):
+    for statement in syntax_tree:
         result = execute(statement)
         print(result)
 
@@ -12,7 +12,6 @@ def execute(tree):
     # Termination condition for recursion
     if not isinstance(tree, list):
         return tree
-
 
     # basic arithmetic
     if tree[0] == 'PLUS':
@@ -28,23 +27,22 @@ def execute(tree):
         return execute(tree[1]) * execute(tree[2])
 
     if tree[0] == 'DIV':
-        if tree[2] !=0:
+        if tree[2] != 0:
             return execute(tree[1]) / execute(tree[2])
         else:
             denominator_error(tree[3])
 
     if tree[0] == 'INTDIV':
-        if tree[2] !=0:
+        if tree[2] != 0:
             return execute(tree[1]) // execute(tree[2])
         else:
             denominator_error(tree[3])
 
     if tree[0] == 'MOD':
-        if tree[2] !=0:
+        if tree[2] != 0:
             return execute(tree[1]) % execute(tree[2])
         else:
             denominator_error(tree[3])
-
 
     # conditions
     if tree[0] == 'EQUAL':
@@ -65,6 +63,9 @@ def execute(tree):
     if tree[0] == 'OR':
         return execute(tree[1]) | execute(tree[2])
 
+    # print function
+    if tree[0] == 'PRINT':
+        return execute(tree[1])
 
     # if statements
     if tree[0] == 'IF':
@@ -80,7 +81,6 @@ def execute(tree):
         else:
             execute_tree(tree[3])
         return 'IFELSE-END'
-
 
     # loops
     if tree[0] == 'FOR':
@@ -109,8 +109,7 @@ def execute(tree):
             execute_tree(tree[2])
         return 'WHILE-LOOP-END'
 
-    ### variables
-
+    # ---VARIABLES---
     # resolve variable
     if tree[0] == "VAR":
         return getVariable(tree[1], tree[2])
@@ -150,7 +149,7 @@ def execute(tree):
     # reassignment
     if tree[0] == 'REASSIGNMENT':
         if not (tree[1] in savedVariables and type(execute(tree[2])) == type(savedVariables[tree[1]])):
-            if not(isinstance(execute(tree[3]), (float, int)) and isinstance(savedVariables[tree[1]], (float, int))):
+            if not (isinstance(execute(tree[3]), (float, int)) and isinstance(savedVariables[tree[1]], (float, int))):
                 wrong_reassignment_error(tree[3])
 
         savedVariableType = type(savedVariables[tree[1]])

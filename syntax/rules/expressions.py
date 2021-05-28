@@ -39,6 +39,13 @@ def p_expression_condition(p):
     p[0] = p[1]
 
 
+# PRINT FUNCTION
+
+def p_print(p):
+    'expression : PRINT ROUND_START expression ROUND_END'
+    p[0] = ['PRINT', p[3]]
+
+
 # IF ELSE STATEMENT
 
 def p_if_statement(p):
