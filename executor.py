@@ -2,6 +2,12 @@ from error_handling.error import wrong_assignment_error, wrong_reassignment_erro
 from syntax.rules.savedVariables import savedVariables, getVariable
 
 
+def execute_tree(syntaxTree):
+    for statement in syntaxTree:
+        result = execute(statement)
+        print(result)
+
+
 def execute(tree):
     # Termination condition for recursion
     if not isinstance(tree, list):
@@ -64,21 +70,15 @@ def execute(tree):
     if tree[0] == 'IF':
         print('IF-START')
         if tree[1]:
-            for statement in tree[2]:
-                executed_statement = str(execute(statement))
-                print('   ' + executed_statement)
+            execute_tree(tree[2])
         return 'IF-END'
 
     if tree[0] == 'IFELSE':
         print('IFELSE-START')
         if tree[1]:
-            for statement in tree[2]:
-                executed_statement = str(execute(statement))
-                print('   ' + executed_statement)
+            execute_tree(tree[2])
         else:
-            for statement in tree[3]:
-                executed_statement = str(execute(statement))
-                print('   ' + executed_statement)
+            execute_tree(tree[3])
         return 'IFELSE-END'
 
 
@@ -87,17 +87,26 @@ def execute(tree):
         loop_repetitions = int(execute(tree[1]))
         print('FOR-LOOP-START (' + str(loop_repetitions) + ')')
         for x in range(loop_repetitions):
-            for statement in tree[2]:
-                executed_statement = str(execute(statement))
-                print('   ' + executed_statement)
+            execute_tree(tree[2])
         return 'FOR-LOOP-END'
+
+    # TODO: Wollen wir FOR-Loops ohne Laufvariable?
+    if tree[0] == 'FOR_START_END':
+        print('FOR-START-END-LOOP-START')
+        for x in range(int(execute(tree[1])), int(execute(tree[2]))):
+            execute_tree(tree[3])
+        return 'FOR-START-END-LOOP-END'
+
+    if tree[0] == 'FOR_START_END_STEP':
+        print('FOR-START-END-STEP-LOOP-START')
+        for x in range(int(execute(tree[1])), int(execute(tree[2])), int(execute(tree[3]))):
+            execute_tree(tree[4])
+        return 'FOR-START-END-STEP-LOOP-END'
 
     if tree[0] == 'WHILE':
         print('WHILE-LOOP-START')
         while execute(tree[1]):
-            for statement in tree[2]:
-                executed_statement = str(execute(statement))
-                print('   ' + executed_statement)
+            execute_tree(tree[2])
         return 'WHILE-LOOP-END'
 
     ### variables

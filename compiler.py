@@ -1,17 +1,15 @@
 import sys
+
+from executor import execute_tree
 from tokens.tokens import tokens
 from lexical.lexical import *
 from syntax.syntax import *
-from executor import execute
 
 if len(sys.argv) == 1:
     while True:
         syntaxTree = parser.parse(input("Please enter something:\n"))
         print(syntaxTree)
-        for statement in syntaxTree:
-            result = execute(statement)
-            print(result)
-
+        execute_tree(syntaxTree)
 else:
     f = open(sys.argv[1])
     content = f.readlines()
@@ -20,6 +18,4 @@ else:
         code += line
     syntaxTree = parser.parse(code)
     print(syntaxTree)
-    for statement in syntaxTree:
-        result = execute(statement)
-        print(result)
+    execute_tree(syntaxTree)

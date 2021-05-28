@@ -7,10 +7,10 @@ def p_statements(p):
     p[0] = p[1] + p[2]
 
 def p_statement(p):
-    """statement  : expression END_OF_STATEMENT
+    """statement  : expression SEMICOLON
                   | if_statement
                   | loop
-                  | variable END_OF_STATEMENT"""
+                  | variable SEMICOLON"""
     p[0] = [p[1]]
 
 
@@ -51,10 +51,18 @@ def p_if_else_statement(p):
 
 
 # FOR LOOP
-
+# TODO: variables for loop-repetition
 def p_for_loop(p):
     'loop : FOR ROUND_START NUMBER ROUND_END CURLY_START statements CURLY_END'
     p[0] = ['FOR', p[3], p[6]]
+
+def p_for_loop_start_end(p):
+    'loop : FOR ROUND_START NUMBER SEMICOLON NUMBER ROUND_END CURLY_START statements CURLY_END'
+    p[0] = ['FOR_START_END', p[3], p[5], p[8]]
+
+def p_for_loop_start_end_step(p):
+    'loop : FOR ROUND_START NUMBER SEMICOLON NUMBER SEMICOLON NUMBER ROUND_END CURLY_START statements CURLY_END'
+    p[0] = ['FOR_START_END_STEP', p[3], p[5], p[7], p[10]]
 
 
 # WHILE LOOP
