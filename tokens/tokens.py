@@ -14,7 +14,7 @@ reserved = {
 }
 
 tokens = [
-    'END_OF_STATEMENT',
+    'SEMICOLON',
     'OR',
     'AND',
     'ASSIGNMENT',

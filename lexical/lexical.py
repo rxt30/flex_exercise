@@ -26,7 +26,7 @@ t_QUOTED_CHARS = r'(\"[^\"]+\")|(\'[^\']+\')'
 t_ignore = ' \t'
 t_ignore_COMMENT = r'\#.*'
 
-t_END_OF_STATEMENT = ';'
+t_SEMICOLON = ';'
 
 #Token with a function
 def t_NUMBER(t):
