@@ -7,6 +7,7 @@ def execute(tree):
     if not isinstance(tree, list):
         return tree
 
+
     # basic arithmetic
     if tree[0] == 'PLUS':
         return execute(tree[1]) + execute(tree[2])
@@ -37,6 +38,7 @@ def execute(tree):
             return execute(tree[1]) % execute(tree[2])
         else:
             denominator_error(tree[3])
+
 
     # conditions
     if tree[0] == 'EQUAL':
@@ -79,16 +81,24 @@ def execute(tree):
                 print('   ' + executed_statement)
         return 'IFELSE-END'
 
-    # for loops
+
+    # loops
     if tree[0] == 'FOR':
-        loop_repetitions = int(tree[1])
-        print('LOOP-START (' + str(loop_repetitions) + ')')
+        loop_repetitions = int(execute(tree[1]))
+        print('FOR-LOOP-START (' + str(loop_repetitions) + ')')
         for x in range(loop_repetitions):
             for statement in tree[2]:
                 executed_statement = str(execute(statement))
                 print('   ' + executed_statement)
-        return 'LOOP-END'
+        return 'FOR-LOOP-END'
 
+    if tree[0] == 'WHILE':
+        print('WHILE-LOOP-START')
+        while execute(tree[1]):
+            for statement in tree[2]:
+                executed_statement = str(execute(statement))
+                print('   ' + executed_statement)
+        return 'WHILE-LOOP-END'
 
     ### variables
 
