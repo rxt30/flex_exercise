@@ -78,9 +78,19 @@ if(false){
 }
 
 # for
-
+int fur=0;
+int fuur=0;
+int fuuur=0;
+for(10){fur=fur+1;}
+for(2;5){fuur=fuur+1;}
+for(2;10;2){fuuur=fuuur+1;}
 
 # while
+bool temo=true;
+bool teso=false;
+while(temo){temo=false;}
+while(teso){teso=true;}
+
 
 
 
