@@ -3,9 +3,11 @@ from syntax.rules.savedVariables import savedVariables, getVariable
 
 
 def execute_tree(syntax_tree):
-    for statement in syntax_tree:
-        result = execute(statement)
-        print(result)
+    if syntax_tree:
+        for statement in syntax_tree:
+            result = execute(statement)
+            if result is not None:
+                print(result)
 
 
 def execute(tree):
@@ -27,19 +29,19 @@ def execute(tree):
         return execute(tree[1]) * execute(tree[2])
 
     if tree[0] == 'DIV':
-        if tree[2] != 0:
+        if execute(tree[2]) != 0:
             return execute(tree[1]) / execute(tree[2])
         else:
             denominator_error(tree[3])
 
     if tree[0] == 'INTDIV':
-        if tree[2] != 0:
+        if execute(tree[2]) != 0:
             return execute(tree[1]) // execute(tree[2])
         else:
             denominator_error(tree[3])
 
     if tree[0] == 'MOD':
-        if tree[2] != 0:
+        if execute(tree[2]) != 0:
             return execute(tree[1]) % execute(tree[2])
         else:
             denominator_error(tree[3])
@@ -64,19 +66,21 @@ def execute(tree):
         return execute(tree[1]) | execute(tree[2])
 
     # print function
+    # TODO: print AND/OR return value?
     if tree[0] == 'PRINT':
-        return execute(tree[1])
+        print(execute(tree[1]))
+        return
 
     # if statements
     if tree[0] == 'IF':
         print('IF-START')
-        if tree[1]:
+        if execute(tree[1]):
             execute_tree(tree[2])
         return 'IF-END'
 
     if tree[0] == 'IFELSE':
         print('IFELSE-START')
-        if tree[1]:
+        if execute(tree[1]):
             execute_tree(tree[2])
         else:
             execute_tree(tree[3])
@@ -90,7 +94,7 @@ def execute(tree):
             execute_tree(tree[2])
         return 'FOR-LOOP-END'
 
-    # TODO: Wollen wir FOR-Loops ohne Laufvariable?
+    # TODO: Wollen wir tatsächlich FOR-Loops ohne Laufvariable?
     if tree[0] == 'FOR_START_END':
         print('FOR-START-END-LOOP-START')
         for x in range(int(execute(tree[1])), int(execute(tree[2]))):
@@ -142,17 +146,18 @@ def execute(tree):
     if tree[0] == 'ASSIGNMENT_BOOL':
         if type(execute(tree[2])) is not bool:
             wrong_assignment_error(tree[3])
-        savedVariables.update({execute(tree[1]): execute(tree[2])})
+        savedVariables.update({tree[1]: execute(tree[2])})
         print(savedVariables)
         return 'ASSIGNMENT_BOOL-END'
 
     # reassignment
     if tree[0] == 'REASSIGNMENT':
-        if not (tree[1] in savedVariables and type(execute(tree[2])) == type(savedVariables[tree[1]])):
-            if not (isinstance(execute(tree[3]), (float, int)) and isinstance(savedVariables[tree[1]], (float, int))):
+        savedVariableType = type(savedVariables[tree[1]])
+
+        if not (tree[1] in savedVariables and isinstance(type(execute(tree[2])), savedVariableType)):
+            if not (isinstance(execute(tree[2]), (float, int)) and isinstance(savedVariables[tree[1]], (float, int))):
                 wrong_reassignment_error(tree[3])
 
-        savedVariableType = type(savedVariables[tree[1]])
         if savedVariableType is str:
             savedVariables.update({tree[1]: execute(tree[2]).strip("'\"")})
         elif savedVariableType is int:
@@ -160,9 +165,9 @@ def execute(tree):
         elif savedVariableType is float:
             savedVariables.update({tree[1]: float(execute(tree[2]))})
         elif savedVariableType is bool:
-            savedVariables.update({tree[1]: execute(tree[2]) == True})
+            savedVariables.update({tree[1]: execute(tree[2])})
 
         print(savedVariables)
         return 'REASSIGNMENT-END'
 
-    return 'error'
+    return 'NO_EXECUTION_RULE_ERROR'
