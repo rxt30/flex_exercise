@@ -58,7 +58,6 @@ def p_if_else_statement(p):
 
 
 # FOR LOOP
-# TODO: variables for loop-repetition
 def p_for_loop(p):
     'loop : FOR ROUND_START NUMBER ROUND_END CURLY_START statements CURLY_END'
     p[0] = ['FOR', p[3], p[6]]

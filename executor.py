@@ -3,9 +3,11 @@ from syntax.rules.savedVariables import savedVariables, getVariable
 
 
 def execute_tree(syntax_tree):
-    for statement in syntax_tree:
-        result = execute(statement)
-        print(result)
+    if syntax_tree:
+        for statement in syntax_tree:
+            result = execute(statement)
+            if result is not None:
+                print(result)
 
 
 def execute(tree):
@@ -66,7 +68,8 @@ def execute(tree):
     # print function
     # TODO: print AND/OR return value?
     if tree[0] == 'PRINT':
-        return execute(tree[1])
+        print(execute(tree[1]))
+        return
 
     # if statements
     if tree[0] == 'IF':

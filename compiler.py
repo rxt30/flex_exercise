@@ -8,7 +8,7 @@ from syntax.syntax import *
 if len(sys.argv) == 1:
     while True:
         syntaxTree = parser.parse(input("Please enter something:\n"))
-        print(syntaxTree)
+        print('Syntax-Tree: ' + str(syntaxTree))
         execute_tree(syntaxTree)
 else:
     f = open(sys.argv[1])
@@ -17,5 +17,5 @@ else:
     for line in content:
         code += line
     syntaxTree = parser.parse(code)
-    print(syntaxTree)
+    print('Syntax-Tree: ' + str(syntaxTree))
     execute_tree(syntaxTree)
