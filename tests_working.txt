@@ -88,9 +88,8 @@ for(2;10;2){fuuur=fuuur+1;}
 # while
 bool temo=true;
 bool teso=false;
-while(temo){temo=false;}
+while(temo){
+    temo=false;
+    print("Hello World");
+}
 while(teso){teso=true;}
-
-
-
-
