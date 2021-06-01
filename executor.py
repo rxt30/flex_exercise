@@ -153,8 +153,7 @@ def execute(tree):
     # reassignment
     if tree[0] == 'REASSIGNMENT':
         savedVariableType = type(savedVariables[tree[1]])
-
-        if not (tree[1] in savedVariables and isinstance(type(execute(tree[2])), savedVariableType)):
+        if not (tree[1] in savedVariables and isinstance(execute(tree[2]), savedVariableType)):
             if not (isinstance(execute(tree[2]), (float, int)) and isinstance(savedVariables[tree[1]], (float, int))):
                 wrong_reassignment_error(tree[3])
 
