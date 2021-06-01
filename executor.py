@@ -149,11 +149,12 @@ def execute(tree):
 
     # reassignment
     if tree[0] == 'REASSIGNMENT':
-        if not (tree[1] in savedVariables and type(execute(tree[2])) == type(savedVariables[tree[1]])):
+        savedVariableType = type(savedVariables[tree[1]])
+
+        if not (tree[1] in savedVariables and isinstance(type(execute(tree[2])), savedVariableType)):
             if not (isinstance(execute(tree[2]), (float, int)) and isinstance(savedVariables[tree[1]], (float, int))):
                 wrong_reassignment_error(tree[3])
 
-        savedVariableType = type(savedVariables[tree[1]])
         if savedVariableType is str:
             savedVariables.update({tree[1]: execute(tree[2]).strip("'\"")})
         elif savedVariableType is int:
