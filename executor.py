@@ -1,12 +1,13 @@
 from error_handling.error import wrong_assignment_error, wrong_reassignment_error, denominator_error
 from syntax.rules.savedVariables import savedVariables, getVariable
 
+verbose = False
 
 def execute_tree(syntax_tree):
     if syntax_tree:
         for statement in syntax_tree:
             result = execute(statement)
-            if result is not None:
+            if result is not None and verbose:
                 print(result)
 
 
@@ -73,13 +74,13 @@ def execute(tree):
 
     # if statements
     if tree[0] == 'IF':
-        print('IF-START')
+        if verbose: print('IF-START')
         if execute(tree[1]):
             execute_tree(tree[2])
         return 'IF-END'
 
     if tree[0] == 'IFELSE':
-        print('IFELSE-START')
+        if verbose: print('IFELSE-START')
         if execute(tree[1]):
             execute_tree(tree[2])
         else:
@@ -89,26 +90,26 @@ def execute(tree):
     # loops
     if tree[0] == 'FOR':
         loop_repetitions = int(execute(tree[1]))
-        print('FOR-LOOP-START (' + str(loop_repetitions) + ')')
+        if verbose: print('FOR-LOOP-START (' + str(loop_repetitions) + ')')
         for x in range(loop_repetitions):
             execute_tree(tree[2])
         return 'FOR-LOOP-END'
 
     # TODO: Wollen wir tatsächlich FOR-Loops ohne Laufvariable?
     if tree[0] == 'FOR_START_END':
-        print('FOR-START-END-LOOP-START')
+        if verbose: print('FOR-START-END-LOOP-START')
         for x in range(int(execute(tree[1])), int(execute(tree[2]))):
             execute_tree(tree[3])
         return 'FOR-START-END-LOOP-END'
 
     if tree[0] == 'FOR_START_END_STEP':
-        print('FOR-START-END-STEP-LOOP-START')
+        if verbose: print('FOR-START-END-STEP-LOOP-START')
         for x in range(int(execute(tree[1])), int(execute(tree[2])), int(execute(tree[3]))):
             execute_tree(tree[4])
         return 'FOR-START-END-STEP-LOOP-END'
 
     if tree[0] == 'WHILE':
-        print('WHILE-LOOP-START')
+        if verbose: print('WHILE-LOOP-START')
         while execute(tree[1]):
             execute_tree(tree[2])
         return 'WHILE-LOOP-END'
@@ -123,7 +124,7 @@ def execute(tree):
         if not isinstance(execute(tree[2]), (float, int)):
             wrong_assignment_error(tree[3])
         savedVariables.update({tree[1]: int(execute(tree[2]))})
-        print(savedVariables)
+        if verbose: print(savedVariables)
         return 'ASSIGNMENT_INT-END'
 
     # float assignment
@@ -131,7 +132,7 @@ def execute(tree):
         if not isinstance(execute(tree[2]), (float, int)):
             wrong_assignment_error(tree[3])
         savedVariables.update({tree[1]: float(execute(tree[2]))})
-        print(savedVariables)
+        if verbose: print(savedVariables)
         return 'ASSIGNMENT_FLOAT-END'
 
     # string assignment
@@ -139,7 +140,7 @@ def execute(tree):
         if type(execute(tree[2])) is not str:
             wrong_assignment_error(tree[3])
         savedVariables.update({tree[1]: execute(tree[2]).strip("'\"")})
-        print(savedVariables)
+        if verbose: print(savedVariables)
         return 'ASSIGNMENT_STRING-END'
 
     # boolean assignment
@@ -147,7 +148,7 @@ def execute(tree):
         if type(execute(tree[2])) is not bool:
             wrong_assignment_error(tree[3])
         savedVariables.update({tree[1]: execute(tree[2])})
-        print(savedVariables)
+        if verbose: print(savedVariables)
         return 'ASSIGNMENT_BOOL-END'
 
     # reassignment
@@ -166,7 +167,7 @@ def execute(tree):
         elif savedVariableType is bool:
             savedVariables.update({tree[1]: execute(tree[2])})
 
-        print(savedVariables)
+        if verbose: print(savedVariables)
         return 'REASSIGNMENT-END'
 
     return 'NO_EXECUTION_RULE_ERROR'

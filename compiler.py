@@ -1,11 +1,8 @@
 import sys
+import executor
 
-from executor import execute_tree
-from tokens.tokens import tokens
 from lexical.lexical import *
 from syntax.syntax import *
-
-verbose = False
 
 for names in sys.argv[1:]:
     if names == '-h':
@@ -15,14 +12,14 @@ for names in sys.argv[1:]:
                     -v Verbose mode''')
         exit(0)
     elif names == '-v':
-        verbose = True
+        executor.verbose = True
 
-if len(sys.argv) == 1 or (verbose and len(sys.argv) == 2):
+if len(sys.argv) == 1 or (executor.verbose and len(sys.argv) == 2):
     while True:
         syntaxTree = parser.parse(input("Please enter something:\n"))
-        if verbose:
+        if executor.verbose:
             print('Syntax-Tree: ' + str(syntaxTree))
-        execute_tree(syntaxTree)
+        executor.execute_tree(syntaxTree)
 
 else:
     for names in sys.argv[1:]:
@@ -41,6 +38,6 @@ else:
     for line in content:
         code += line
     syntaxTree = parser.parse(code)
-    if verbose:
+    if executor.verbose:
         print('Syntax-Tree: ' + str(syntaxTree))
-    execute_tree(syntaxTree)
+    executor.execute_tree(syntaxTree)
