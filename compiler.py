@@ -5,17 +5,42 @@ from tokens.tokens import tokens
 from lexical.lexical import *
 from syntax.syntax import *
 
-if len(sys.argv) == 1:
+verbose = False
+
+for names in sys.argv[1:]:
+    if names == '-h':
+        print('''
+        Usage: python compiler.py [OPTION] [FILENAME]\n
+        Options:    -h Shows this help menu\n
+                    -v Verbose mode''')
+        exit(0)
+    elif names == '-v':
+        verbose = True
+
+if len(sys.argv) == 1 or (verbose and len(sys.argv) == 2):
     while True:
         syntaxTree = parser.parse(input("Please enter something:\n"))
-        print('Syntax-Tree: ' + str(syntaxTree))
+        if verbose:
+            print('Syntax-Tree: ' + str(syntaxTree))
         execute_tree(syntaxTree)
+
 else:
-    f = open(sys.argv[1])
-    content = f.readlines()
+    for names in sys.argv[1:]:
+        try:
+            f = open(names)
+            content = f.readlines()
+            break
+        except:
+            pass
+
+    if not content:
+        print("Invalid file delivered")
+        exit(1)
+
     code = ''
     for line in content:
         code += line
     syntaxTree = parser.parse(code)
-    print('Syntax-Tree: ' + str(syntaxTree))
+    if verbose:
+        print('Syntax-Tree: ' + str(syntaxTree))
     execute_tree(syntaxTree)
