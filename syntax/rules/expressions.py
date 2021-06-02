@@ -62,8 +62,8 @@ def p_for_loop(p):
     p[0] = ['FOR', p[2], p[5], p[8], p.lineno(1)]
 
 def p_for_loop_start_end(p):
-    'loop : FOR ROUND_START NUMBER SEMICOLON NUMBER ROUND_END CURLY_START statements CURLY_END'
-    p[0] = ['FOR_START_END', p[3], p[5], p[8]]
+    'loop : FOR CHARS IN ROUND_START NUMBER SEMICOLON NUMBER ROUND_END CURLY_START statements CURLY_END'
+    p[0] = ['FOR_START_END', p[2], p[5], p[7], p[10], p.lineno(1)]
 
 def p_for_loop_start_end_step(p):
     'loop : FOR ROUND_START NUMBER SEMICOLON NUMBER SEMICOLON NUMBER ROUND_END CURLY_START statements CURLY_END'
