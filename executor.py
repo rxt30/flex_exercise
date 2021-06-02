@@ -89,10 +89,14 @@ def execute(tree):
 
     # loops
     if tree[0] == 'FOR':
-        loop_repetitions = int(execute(tree[1]))
+        loopVar = tree[1]
+        savedVariables.update({loopVar: 0})
+        loop_repetitions = int(execute(tree[2]))
+
         if verbose: print('FOR-LOOP-START (' + str(loop_repetitions) + ')')
         for x in range(loop_repetitions):
-            execute_tree(tree[2])
+            execute_tree(tree[3])
+            savedVariables.update({loopVar: getVariable(loopVar, tree[4])+1})
         return 'FOR-LOOP-END'
 
     # TODO: Wollen wir tatsächlich FOR-Loops ohne Laufvariable?

@@ -56,11 +56,10 @@ def p_if_else_statement(p):
     'if_statement : IF ROUND_START condition ROUND_END CURLY_START statements CURLY_END ELSE CURLY_START statements CURLY_END'
     p[0] = ['IFELSE', p[3], p[6], p[10]]
 
-
 # FOR LOOP
 def p_for_loop(p):
-    'loop : FOR ROUND_START NUMBER ROUND_END CURLY_START statements CURLY_END'
-    p[0] = ['FOR', p[3], p[6]]
+    'loop : FOR CHARS IN ROUND_START NUMBER ROUND_END CURLY_START statements CURLY_END'
+    p[0] = ['FOR', p[2], p[5], p[8], p.lineno(1)]
 
 def p_for_loop_start_end(p):
     'loop : FOR ROUND_START NUMBER SEMICOLON NUMBER ROUND_END CURLY_START statements CURLY_END'
