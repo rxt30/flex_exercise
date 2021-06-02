@@ -92,7 +92,7 @@ def check_tree(tree, level):
     elif tree[0] == 'PRINT':
         cl_tree_append('PRINT', level)
         browser_tree_append('[PRINT [(]')
-        check(tree[1], level)
+        check(tree[1], level+1)
         browser_tree_append('[)]]')
 
     # if
@@ -122,42 +122,48 @@ def check_tree(tree, level):
     elif tree[0] == 'FOR':
         cl_tree_append('FOR_STATEMENT', level)
         cl_tree_append('FOR', level + 1)
+        cl_tree_append(tree[1], level + 1)
+        cl_tree_append('IN', level + 1)
         cl_tree_append('NUMBER_OF_ITERATIONS', level + 1)
-        browser_tree_append('[FOR-STATEMENT [FOR] [(] [NUMBER-OF-ITERATIONS')
-        check(tree[1], level + 2)
+        browser_tree_append('[FOR-STATEMENT [FOR] '+tree[1]+' [IN] [(] [NUMBER-OF-ITERATIONS')
+        check(tree[2], level + 2)
         browser_tree_append('] [)] [{]')
-        check(tree[2], level + 1)
+        check(tree[3], level + 1)
         browser_tree_append('[}] ]')
 
     # for_start_end
     elif tree[0] == 'FOR_START_END':
         cl_tree_append('FOR_STATEMENT', level)
         cl_tree_append('FOR', level + 1)
+        cl_tree_append(tree[1], level + 1)
+        cl_tree_append('IN', level + 1)
         cl_tree_append('START', level + 1)
-        browser_tree_append('[FOR-STATEMENT [FOR] [(] [START')
-        check(tree[1], level + 2)
+        browser_tree_append('[FOR-STATEMENT [FOR] '+tree[1]+' [IN] [(] [START')
+        check(tree[2], level + 2)
         cl_tree_append('END', level + 1)
         browser_tree_append('] [;] [END')
-        check(tree[2], level + 2)
+        check(tree[3], level + 2)
         browser_tree_append('] [)] [{]')
-        check(tree[3], level + 1)
+        check(tree[4], level + 1)
         browser_tree_append('[}] ]')
 
     # for_start_end_step
     elif tree[0] == 'FOR_START_END_STEP':
         cl_tree_append('FOR_STATEMENT', level)
         cl_tree_append('FOR', level + 1)
+        cl_tree_append(tree[1], level + 1)
+        cl_tree_append('IN', level + 1)
         cl_tree_append('START', level + 1)
-        browser_tree_append('[FOR-STATEMENT [FOR] [(] [START')
-        check(tree[1], level + 2)
+        browser_tree_append('[FOR-STATEMENT [FOR] '+tree[1]+' [IN] [(] [START')
+        check(tree[2], level + 2)
         cl_tree_append('END', level + 1)
         browser_tree_append('] [;] [END')
-        check(tree[2], level + 2)
+        check(tree[3], level + 2)
         cl_tree_append('STEP', level + 1)
         browser_tree_append('] [;] [STEP')
-        check(tree[3], level + 2)
+        check(tree[4], level + 2)
         browser_tree_append('] [)] [{]')
-        check(tree[4], level + 1)
+        check(tree[5], level + 1)
         browser_tree_append('[}] ]')
 
     # while
@@ -229,7 +235,7 @@ def calc(tree, level, name, operant):
     if operant == '%':
         operant = '%25'
     if operant == '+':
-        operant = '%2B'
+        operant = 'PLUS'
 
     browser_tree_append(' [OPERATOR ' + operant + '] ')
     check(tree[2], level + 1)
