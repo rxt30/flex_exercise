@@ -90,26 +90,31 @@ def execute(tree):
     # loops
     if tree[0] == 'FOR':
         loopVar = tree[1]
-        savedVariables.update({loopVar: 0})
         loop_repetitions = int(execute(tree[2]))
 
         if verbose: print('FOR-LOOP-START (' + str(loop_repetitions) + ')')
         for x in range(loop_repetitions):
+            savedVariables.update({loopVar: x})
             execute_tree(tree[3])
-            savedVariables.update({loopVar: getVariable(loopVar, tree[4])+1})
         return 'FOR-LOOP-END'
 
     # TODO: Wollen wir tatsächlich FOR-Loops ohne Laufvariable?
     if tree[0] == 'FOR_START_END':
+        loopVar = tree[1]
+
         if verbose: print('FOR-START-END-LOOP-START')
-        for x in range(int(execute(tree[1])), int(execute(tree[2]))):
-            execute_tree(tree[3])
+        for x in range(int(execute(tree[2])), int(execute(tree[3]))):
+            savedVariables.update({loopVar: x})
+            execute_tree(tree[4])
         return 'FOR-START-END-LOOP-END'
 
     if tree[0] == 'FOR_START_END_STEP':
+        loopVar = tree[1]
+
         if verbose: print('FOR-START-END-STEP-LOOP-START')
-        for x in range(int(execute(tree[1])), int(execute(tree[2])), int(execute(tree[3]))):
-            execute_tree(tree[4])
+        for x in range(int(execute(tree[2])), int(execute(tree[3])), int(execute(tree[4]))):
+            savedVariables.update({loopVar: x})
+            execute_tree(tree[5])
         return 'FOR-START-END-STEP-LOOP-END'
 
     if tree[0] == 'WHILE':
