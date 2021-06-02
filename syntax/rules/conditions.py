@@ -8,6 +8,10 @@ def p_condition_false(p):
     'condition : FALSE'
     p[0] = False
 
+def p_condition_expression(p):
+    'condition : CHARS'
+    p[0] = ['VAR', p[1], p.lineno(1)]
+
 def p_condition_equal(p):
     'condition : expression EQUAL expression'
     p[0] = ['EQUAL', p[1], p[3]]

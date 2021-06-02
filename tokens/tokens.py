@@ -11,7 +11,8 @@ reserved = {
     'true': 'TRUE',
     'false': 'FALSE',
     '==': 'EQUAL',
-    '!=': 'NOT_EQUAL'
+    '!=': 'NOT_EQUAL',
+    'in': 'IN'
 }
 
 tokens = [
