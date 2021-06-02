@@ -1,27 +1,59 @@
-exportTree = ''
+import webbrowser
+
+# command line syntax tree
+clTree = []
+# syntax tree with brackets style for online tool
+browserTree = ''
+
+# functions for command line syntax tree
+def cl_tree_append(x, level):
+    output = '--- ' * level + str(x)
+    global clTree
+    clTree.append(output)
+
+def cl_tree_print():
+    global clTree
+    for x in clTree:
+        print(x)
+
+def cl_tree_reset():
+    global clTree
+    clTree = []
+
+# functions for Online Syntax Tree
+def browser_tree_append(x):
+    global browserTree
+    browserTree = browserTree + x
+
+def browser_open():
+    global browserTree
+    link = "http://mshang.ca/syntree/?i=" + browserTree
+    webbrowser.open_new(link)
+
+def browser_tree_reset():
+    global browserTree
+    browserTree = ''
 
 
-def append_tree(x):
-    global exportTree
-    exportTree = exportTree + x
 
 
-def print_tree():
-    global exportTree
-    print(exportTree)
-
-
-def reset_tree():
-    global exportTree
-    exportTree = ''
-
-
+# main function called from compiler
 def build_tree(tree):
-	reset_tree()
-	check_tree(tree, 0)
-	print_tree()
+    # reset global variables
+    cl_tree_reset()
+    browser_tree_reset()
+
+    # start converting syntax tree
+    check_tree(tree, 0)
+
+    # outputs
+    cl_tree_print()
+    browser_open()
 
 
+
+
+# recursive function to check elements in tree
 def check_tree(tree, level):
     # Calculations
     if tree[0] == 'PLUS':
@@ -51,75 +83,91 @@ def check_tree(tree, level):
 
     # print function
     elif tree[0] == 'PRINT':
-        myPrint('PRINT', level)
-        append_tree('[PRINT ')
+        cl_tree_append('PRINT', level)
+        browser_tree_append('[PRINT [(]')
         check(tree[1], level)
-        append_tree(']')
+        browser_tree_append('[)]]')
 
     # if
     elif tree[0] == 'IF':
-        myPrint('IF-STATEMENT', level)
-        myPrint('IF', level + 1)
-        append_tree('[IF-STATEMENT [IF] [(] ')
+        cl_tree_append('IF-STATEMENT', level)
+        cl_tree_append('IF', level + 1)
+        browser_tree_append('[IF-STATEMENT [IF] [(] ')
         check(tree[1], level + 1)
-        append_tree('[)] [{] ')
+        browser_tree_append('[)] [{] ')
         check(tree[2], level + 1)
-        append_tree('[}] ]')
+        browser_tree_append('[}] ]')
 
     # if else
     elif tree[0] == 'IFELSE':
-        myPrint('IF-ELSE-STATEMENT', level)
-        myPrint('IF', level + 1)
-        append_tree('[IF-ELSE-STATEMENT [IF] ')
+        cl_tree_append('IF-ELSE-STATEMENT', level)
+        cl_tree_append('IF', level + 1)
+        browser_tree_append('[IF-ELSE-STATEMENT [IF] [(] ')
         check(tree[1], level + 1)
+        browser_tree_append('[)] [{] ')
         check(tree[2], level + 1)
-        myPrint('ELSE', level + 1)
-        append_tree(' [ELSE] ')
+        cl_tree_append('ELSE', level + 1)
+        browser_tree_append(' [}] [ELSE] [{]')
         check(tree[3], level + 1)
-        append_tree(']')
+        browser_tree_append('[}] ]')
 
     # for
     elif tree[0] == 'FOR':
-        myPrint('FOR_STATEMENT', level)
-        myPrint('FOR', level + 1)
-        myPrint('NUMBER_OF_ITERATIONS', level + 1)
+        cl_tree_append('FOR_STATEMENT', level)
+        cl_tree_append('FOR', level + 1)
+        cl_tree_append('NUMBER_OF_ITERATIONS', level + 1)
+        browser_tree_append('[FOR-STATEMENT [FOR] [(] [NUMBER-OF-ITERATIONS')
         check(tree[1], level + 2)
+        browser_tree_append('] [)] [{]')
         check(tree[2], level + 1)
+        browser_tree_append('[}] ]')
 
     # for_start_end
     elif tree[0] == 'FOR_START_END':
-        myPrint('FOR_STATEMENT', level)
-        myPrint('FOR', level + 1)
-        myPrint('START', level + 1)
+        cl_tree_append('FOR_STATEMENT', level)
+        cl_tree_append('FOR', level + 1)
+        cl_tree_append('START', level + 1)
+        browser_tree_append('[FOR-STATEMENT [FOR] [(] [START')
         check(tree[1], level + 2)
-        myPrint('END', level + 1)
+        cl_tree_append('END', level + 1)
+        browser_tree_append('] [;] [END')
         check(tree[2], level + 2)
+        browser_tree_append('] [)] [{]')
         check(tree[3], level + 1)
+        browser_tree_append('[}] ]')
 
     # for_start_end_step
     elif tree[0] == 'FOR_START_END_STEP':
-        myPrint('FOR_STATEMENT', level)
-        myPrint('FOR', level + 1)
-        myPrint('START', level + 1)
+        cl_tree_append('FOR_STATEMENT', level)
+        cl_tree_append('FOR', level + 1)
+        cl_tree_append('START', level + 1)
+        browser_tree_append('[FOR-STATEMENT [FOR] [(] [START')
         check(tree[1], level + 2)
-        myPrint('END', level + 1)
+        cl_tree_append('END', level + 1)
+        browser_tree_append('] [;] [END')
         check(tree[2], level + 2)
-        myPrint('STEP', level + 1)
+        cl_tree_append('STEP', level + 1)
+        browser_tree_append('] [;] [STEP')
         check(tree[3], level + 2)
+        browser_tree_append('] [)] [{]')
         check(tree[4], level + 1)
+        browser_tree_append('[}] ]')
 
     # while
     elif tree[0] == 'WHILE':
-        myPrint('WHILE_STATEMENT', level)
-        myPrint('WHILE', level + 1)
+        cl_tree_append('WHILE_STATEMENT', level)
+        cl_tree_append('WHILE', level + 1)
+        browser_tree_append('[WHILE-STATEMENT [WHILE] [(] ')
         check(tree[1], level + 1)
+        browser_tree_append('[)] [{] ')
         check(tree[2], level + 1)
+        browser_tree_append('[}] ]')
 
     # var
     elif tree[0] == 'VAR':
-        myPrint('VARIABLE', level)
-        myPrint(tree[1], level + 1)
-        check(tree[2], level + 2)
+        cl_tree_append('VARIABLE', level)
+        cl_tree_append(tree[1], level + 1)
+        browser_tree_append('[VAR ['+tree[1]+'] ]')
 
     # assignment
     elif tree[0] == 'ASSIGNMENT_INT':
@@ -136,7 +184,7 @@ def check_tree(tree, level):
     else:
         # check if multiple statements
         if len(tree) > 1:
-            myPrint('STATEMENTS', level)
+            cl_tree_append('STATEMENTS', level)
             level += 1
             for x in tree:
                 check(x, level)
@@ -149,52 +197,59 @@ def check(x, level):
         check_tree(x, level)
     else:
         if type(x) is int:
-            myPrint('INTEGER', level)
-            append_tree('[INTEGER '+str(x)+']')
+            cl_tree_append('INTEGER', level)
+            browser_tree_append('[INTEGER ' + str(x) + ']')
         elif type(x) is float:
-            myPrint('FLOAT', level)
-            append_tree('[FLOAT '+str(x)+']')
+            cl_tree_append('FLOAT', level)
+            browser_tree_append('[FLOAT ' + str(x) + ']')
         elif type(x) is bool:
-            myPrint('BOOLEAN', level)
-            append_tree('[BOOLEAN '+str(x)+']')
+            cl_tree_append('BOOLEAN', level)
+            browser_tree_append('[BOOLEAN ' + str(x) + ']')
         elif type(x) is str:
-            myPrint('STRING', level)
-            append_tree('[STRING '+str(x)+']')
-        myPrint(x, level + 1)
+            cl_tree_append('STRING', level)
+            browser_tree_append('[STRING ' + str(x) + ']')
+        cl_tree_append(x, level + 1)
 
 
 def calc(tree, level, name, operant):
-    append_tree('[')
-    myPrint(name + '-STATEMENT', level)
-    append_tree(name + '-STATEMENT ')
+    browser_tree_append('[')
+    cl_tree_append(name + '-STATEMENT', level)
+    browser_tree_append(name + '-STATEMENT ')
     check(tree[1], level + 1)
-    myPrint('OPERATOR', level + 1)
-    myPrint(operant, level + 2)
-    append_tree(' [OPERATOR ' + operant + '] ')
+    cl_tree_append('OPERATOR', level + 1)
+    cl_tree_append(operant, level + 2)
+
+    if operant == '%':
+        operant = '%25'
+    if operant == '+':
+        operant = '%2B'
+
+    browser_tree_append(' [OPERATOR ' + operant + '] ')
     check(tree[2], level + 1)
-    append_tree(']')
+    browser_tree_append(']')
 
 
 def cond(tree, level, operant):
-    append_tree('[')
-    myPrint(tree[0] + '-CONDITION', level)
-    append_tree(tree[0] + '-CONDITION ')
+    browser_tree_append('[')
+    cl_tree_append(tree[0] + '-CONDITION', level)
+    browser_tree_append(tree[0] + '-CONDITION ')
     check(tree[1], level + 1)
-    myPrint('COMPARISON-OPERATOR', level + 1)
-    myPrint(operant, level + 2)
-    append_tree(' [COMPARISON-OPERATOR ' + operant + '] ')
+    cl_tree_append('COMPARISON-OPERATOR', level + 1)
+    cl_tree_append(operant, level + 2)
+    browser_tree_append(' [COMPARISON-OPERATOR ' + operant + '] ')
     check(tree[2], level + 1)
-    append_tree(']')
+    browser_tree_append(']')
 
 
 def assign(tree, level, typ):
-    myPrint(typ + 'ASSIGNMENT', level)
-    myPrint('NAME', level + 1)
-    myPrint(tree[1], level + 2)
-    myPrint('VALUE', level + 1)
-    myPrint(tree[2], level + 2)
-    append_tree('['+typ+'ASSIGNMENT [NAME '+str(tree[1])+'] [VALUE '+str(tree[2])+']]')
-
-
-def myPrint(x, level):
-    print('--- ' * level + str(x))
+    cl_tree_append(typ + 'ASSIGNMENT', level)
+    cl_tree_append('NAME', level + 1)
+    cl_tree_append(tree[1], level + 2)
+    cl_tree_append('VALUE', level + 1)
+    if isinstance(tree[2],list):
+        browser_tree_append('[' + typ + 'ASSIGNMENT [NAME ' + str(tree[1]) + '] [VALUE')
+        check(tree[2], level + 2)
+        browser_tree_append(']]')
+    else:
+        cl_tree_append(tree[2], level + 2)
+        browser_tree_append('[' + typ + 'ASSIGNMENT [NAME ' + str(tree[1]) + '] [VALUE ' + str(tree[2]) + ']]')
