@@ -1,5 +1,10 @@
 import webbrowser
 
+
+showClTree = False
+showBrowserTree = False
+
+
 # command line syntax tree
 clTree = []
 # syntax tree with brackets style for online tool
@@ -47,8 +52,10 @@ def build_tree(tree):
     check_tree(tree, 0)
 
     # outputs
-    cl_tree_print()
-    browser_open()
+    if showClTree:
+        cl_tree_print()
+    if showBrowserTree:
+        browser_open()
 
 
 

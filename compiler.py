@@ -1,25 +1,40 @@
 import sys
 import executor
+import treeBuilder
 
 from lexical.lexical import *
 from syntax.syntax import *
+
+fileinput = False
 
 for names in sys.argv[1:]:
     if names == '-h':
         print('''
         Usage: python compiler.py [OPTION] [FILENAME]\n
         Options:    -h Shows this help menu\n
-                    -v Verbose mode''')
+                    -f [file] File input\n
+                    -v Verbose mode\n
+                    -t Syntax Tree Output in Command Line\n
+                    -i Syntax Tree Image in Browser''')
         exit(0)
     elif names == '-v':
         executor.verbose = True
+    elif names == '-f':
+        fileinput = True
+    elif names == '-t':
+        treeBuilder.showClTree = True
+    elif names == '-i':
+        treeBuilder.showBrowserTree = True
 
-if len(sys.argv) == 1 or (executor.verbose and len(sys.argv) == 2):
+
+
+if not fileinput:
     while True:
         syntaxTree = parser.parse(input("Please enter something:\n"))
         if executor.verbose:
             print('Syntax-Tree: ' + str(syntaxTree))
         executor.execute_tree(syntaxTree)
+        treeBuilder.build_tree(syntaxTree)
 
 else:
     for names in sys.argv[1:]:
@@ -41,3 +56,4 @@ else:
     if executor.verbose:
         print('Syntax-Tree: ' + str(syntaxTree))
     executor.execute_tree(syntaxTree)
+    treeBuilder.build_tree(syntaxTree)
