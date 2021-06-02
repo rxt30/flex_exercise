@@ -6,4 +6,3 @@ def getVariable(name, line):
     else:
         print("Variable not initiated")
         print("Syntax error on line " + str(line) + "\n")
-        raise SyntaxError
