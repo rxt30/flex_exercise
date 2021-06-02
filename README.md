@@ -10,6 +10,7 @@ A python interpreter is needed, it must be Python Version 3.6 or greater.
 After installing all the required programs, simply clone the project.    
 After cloning the repository, simply start the compiler with `python compiler.py`.    
 To compile a file, start the compiler as following: `python compiler.py <filename>`    
+If you want to have a more detailed look at the syntactical decoding done by the compiler, you can start the compiler with the option `-v`. 
 
 ### Structure
 `compiler.py` serves as the Main-File for this compiler, and should be as short as possible.    
