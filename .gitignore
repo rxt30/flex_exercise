@@ -12,3 +12,4 @@ Testing
 __pycache__
 parser.out
 parsetab.py
+!errors.txt

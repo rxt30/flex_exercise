@@ -1,0 +1,21 @@
+#Wrong lexical analysis
+[;
+$;
+
+#Division error
+7/0;
+7//0;
+7%0;
+
+#Variable not initialised
+abc;
+
+#Variable wrong type
+int abc = "abc";
+
+#Wrong reassignment
+int abc = 10;
+abc = "abc";
+
+
+
