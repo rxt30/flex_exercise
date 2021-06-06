@@ -10,9 +10,12 @@ def p_statement(p):
     """statement  : expression SEMICOLON
                   | if_statement
                   | loop
-                  | variable SEMICOLON"""
+                  | variable SEMICOLON
+                  | empty"""
     p[0] = [p[1]]
 
+def p_empty(p):
+    'empty :'
 
 def p_expression_plus(p):
     'expression : expression PLUS term'

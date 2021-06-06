@@ -1,4 +1,5 @@
-from error_handling.error import wrong_assignment_error, wrong_reassignment_error, denominator_error
+from error_handling.error import wrong_assignment_error, wrong_reassignment_error, denominator_error, syntax_error, \
+    missing_semicolon_error
 from syntax.rules.savedVariables import savedVariables, getVariable
 
 verbose = False
@@ -12,6 +13,8 @@ def execute_tree(syntax_tree):
                     print(result)
             except:
                 print("Error durring execution\n")
+    else:
+        missing_semicolon_error()
 
 
 def execute(tree):

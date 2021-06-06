@@ -13,3 +13,9 @@ def denominator_error(line):
 def variable_not_initiated_error(line):
     print("Variable not initiated")
     print("Access error on line " + str(line) + "\n")
+
+def syntax_error(line):
+    print("Syntax error on line " + str(line) + "\n")
+
+def missing_semicolon_error():
+    print("Missing semicolon on the last line\n")
