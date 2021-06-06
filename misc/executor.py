@@ -6,9 +6,12 @@ verbose = False
 def execute_tree(syntax_tree):
     if syntax_tree:
         for statement in syntax_tree:
-            result = execute(statement)
-            if result is not None and verbose:
-                print(result)
+            try:
+                result = execute(statement)
+                if result is not None and verbose:
+                    print(result)
+            except:
+                print("Error durring execution")
 
 
 def execute(tree):
