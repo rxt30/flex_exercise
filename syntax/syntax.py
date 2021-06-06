@@ -8,6 +8,6 @@ from syntax.rules.conditions import *
 #Error handling
 def p_error(p):
     if p is not None:
-        print("Syntax error on line " + str(p.lineno) + " at position " + str(p.lexpos) + "\n")
+        print("Syntax error on line " + str(p.lineno) + "\n")
 
 parser = yacc.yacc(debug=True)
