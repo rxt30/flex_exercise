@@ -1,8 +1,9 @@
+from error_handling.error import variable_not_initiated_error
+
 savedVariables = {}
 
 def getVariable(name, line):
     if name in savedVariables:
         return savedVariables.get(name)
     else:
-        print("Variable not initiated")
-        print("Syntax error on line " + str(line) + "\n")
+        variable_not_initiated_error(line)

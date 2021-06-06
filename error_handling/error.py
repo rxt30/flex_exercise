@@ -9,3 +9,7 @@ def wrong_reassignment_error(line):
 def denominator_error(line):
     print("The denominator can not be zero")
     print("Mathematical error on line " + str(line) + "\n")
+
+def variable_not_initiated_error(line):
+    print("Variable not initiated")
+    print("Access error on line " + str(line) + "\n")
