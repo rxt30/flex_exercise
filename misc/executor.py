@@ -36,19 +36,19 @@ def execute(tree):
         if execute(tree[2]) != 0:
             return execute(tree[1]) / execute(tree[2])
         else:
-            denominator_error(tree[3])
+            return denominator_error(tree[3])
 
     if tree[0] == 'INTDIV':
         if execute(tree[2]) != 0:
             return execute(tree[1]) // execute(tree[2])
         else:
-            denominator_error(tree[3])
+            return denominator_error(tree[3])
 
     if tree[0] == 'MOD':
         if execute(tree[2]) != 0:
             return execute(tree[1]) % execute(tree[2])
         else:
-            denominator_error(tree[3])
+            return denominator_error(tree[3])
 
     # conditions
     if tree[0] == 'EQUAL':
