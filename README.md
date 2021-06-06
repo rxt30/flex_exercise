@@ -23,8 +23,3 @@ The lexical and syntax analysis will be imported from their respecting folders.
 `lexical/` includes the lexical analysis.    
 `syntax/` includes the syntax analysis, but the syntax rules for the syntax trees itself should go into `syntax/rules` and the imported in `syntax/syntax.py`    
 `tokens/` is the only directory, which defines all the tokens used in this compiler    
-
-### Documentation
-
-All the documentation for this compiler can be foun in the directory `documentation`
-If you want to have a look at the current status and the future plans, just visit the file `current_implementation.xlsx`.
