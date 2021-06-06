@@ -44,6 +44,9 @@ def browser_tree_reset():
 
 # main function called from compiler
 def build_tree(tree):
+    if tree is None:
+        return
+
     # reset global variables
     cl_tree_reset()
     browser_tree_reset()
