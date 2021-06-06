@@ -81,9 +81,9 @@ if(false){
 int fur=0;
 int fuur=0;
 int fuuur=0;
-for i in (10){fur=fur+1;}
-for i in (2;5){fuur=fuur+1;}
-for i in (2;10;2){fuuur=fuuur+1;}
+for i in (10){fur=fur+1;print(i);}
+for i in (2;5){fuur=fuur+1;print(i);}
+for i in (2;10;2){fuuur=fuuur+1;print(i);}
 
 # while
 bool temo=true;
