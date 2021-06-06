@@ -31,8 +31,6 @@ for names in sys.argv[1:]:
 if not fileinput:
     while True:
         syntaxTree = parser.parse(input("Please enter something:\n"))
-        if executor.verbose:
-            print('Syntax-Tree: ' + str(syntaxTree))
         executor.execute_tree(syntaxTree)
         treeBuilder.build_tree(syntaxTree)
 
@@ -53,7 +51,5 @@ else:
     for line in content:
         code += line
     syntaxTree = parser.parse(code)
-    if executor.verbose:
-        print('Syntax-Tree: ' + str(syntaxTree))
     executor.execute_tree(syntaxTree)
     treeBuilder.build_tree(syntaxTree)

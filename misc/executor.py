@@ -70,7 +70,6 @@ def execute(tree):
         return execute(tree[1]) | execute(tree[2])
 
     # print function
-    # TODO: print AND/OR return value?
     if tree[0] == 'PRINT':
         print(execute(tree[1]))
         return
@@ -101,7 +100,6 @@ def execute(tree):
             execute_tree(tree[3])
         return 'FOR-LOOP-END'
 
-    # TODO: Wollen wir tatsächlich FOR-Loops ohne Laufvariable?
     if tree[0] == 'FOR_START_END':
         loopVar = tree[1]
 
