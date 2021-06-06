@@ -11,7 +11,7 @@ def execute_tree(syntax_tree):
                 if result is not None and verbose:
                     print(result)
             except:
-                print("Error durring execution")
+                print("Error durring execution\n")
 
 
 def execute(tree):
