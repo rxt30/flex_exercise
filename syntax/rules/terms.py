@@ -4,15 +4,15 @@ def p_term_multiplication(p):
 
 def p_term_division(p):
     'term : term DIVISION term'
-    p[0] = ['DIV', p[1], p[3], p.lineno(1)]
+    p[0] = ['DIV', p[1], p[3], p.lineno(2)]
 
 def p_term_division_with_no_remainder(p):
     'term : term DIVISION DIVISION term'
-    p[0] = ['INTDIV', p[1], p[4]]
+    p[0] = ['INTDIV', p[1], p[4], p.lineno(2)]
 
 def p_term_modulo(p):
     'term : term MODULO term'
-    p[0] = ['MOD', p[1], p[3]]
+    p[0] = ['MOD', p[1], p[3], p.lineno(2)]
 
 def p_term_expression(p):
     'term : ROUND_START expression ROUND_END MULTIPLICATION term'
