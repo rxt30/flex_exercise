@@ -1,6 +1,6 @@
 import sys
-import executor
-import treeBuilder
+import misc.executor as executor
+import misc.treeBuilder as treeBuilder
 
 from lexical.lexical import *
 from syntax.syntax import *
