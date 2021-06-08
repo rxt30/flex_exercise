@@ -201,9 +201,11 @@ def check_tree(tree, level):
         # check if multiple statements
         if len(tree) > 1:
             cl_tree_append('STATEMENTS', level)
+            browser_tree_append('[STATEMENTS ')
             level += 1
             for x in tree:
                 check(x, level)
+            browser_tree_append(']')
         else:
             check(tree[0], level)
 
