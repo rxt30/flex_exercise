@@ -2,8 +2,8 @@
 
 Repository for making a compiler with ply.  
 A more detailed guide can be found in the file `Documentation-Compiler.pdf`
-If working on a new future/issue, please create your own branch and make a pull request after finishing it. Before merging the new PR please test wether the fix you made, broke soething else. Therefore the file 'tests/test_working.txt' can be used. The command for running the test is:
-> python compiler.py -f tests/test_working.txt.
+If working on a new future/issue, please create your own branch and make a pull request after finishing it. Before merging the new PR please test wether the fix you made, broke soething else. Therefore the file 'tests/test_working.txt' can be used. The command for running the test is:    
+```python compiler.py -f tests/test_working.txt```.
 
 ## Usage
 A prebuild binary can be found on the [release page](https://github.com/rxt30/flex_exercise/releases).
